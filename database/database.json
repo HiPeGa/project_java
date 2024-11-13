@@ -1,0 +1,1518 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "fullName": "John Doe",
+      "email": "johndoe@example.com",
+      "password": "hashed_password",
+      "role": "customer",
+      "token": "d3f7a8b92c41e7e4f6g8",
+      "address": "123 Maple Street, Springfield",
+      "phone": "123-456-7890"
+    },
+    {
+      "id": "2",
+      "fullName": "Jane Doe",
+      "email": "janedoe@example.com",
+      "password": "hashed_password",
+      "role": "customer",
+      "token": "4h9f0b2c87d2e7f6g5h3",
+      "address": "456 Oak Avenue, Metropolis",
+      "phone": "234-567-8901"
+    },
+    {
+      "id": "3",
+      "fullName": "Mark Smith",
+      "email": "marksmith@example.com",
+      "password": "hashed_password",
+      "role": "customer",
+      "token": "5j3k9a4c76h8b2e5f6j7",
+      "address": "789 Pine Road, Gotham",
+      "phone": "345-678-9012"
+    },
+    {
+      "id": "4",
+      "fullName": "Emily Johnson",
+      "email": "emilyjohnson@example.com",
+      "password": "hashed_password",
+      "role": "customer",
+      "token": "8k0l6b3f2g7h1j9n5d3",
+      "address": "101 Cedar Blvd, Star City",
+      "phone": "456-789-0123"
+    },
+    {
+      "id": "5",
+      "fullName": "David Brown",
+      "email": "davidbrown@example.com",
+      "password": "hashed_password",
+      "role": "customer",
+      "token": "6m1n2c4e8h9f3j0l5k6",
+      "address": "202 Birch Street, Central City",
+      "phone": "567-890-1234"
+    },
+    {
+      "id": "6",
+      "fullName": "Nguyen Hoang Hiep",
+      "email": "admin",
+      "password": "admin",
+      "role": "admin",
+      "token": "383ha812hf93hf93hfq3",
+      "address": "789 Quan Hoa, Cau Giay, Hanoi",
+      "phone": "098-765-4321"
+    },
+    {
+      "id": "8",
+      "fullName": "Nguyen Hoang Hiep",
+      "email": "hiep2804@gmail.com",
+      "password": "1234",
+      "role": "customer",
+      "token": "IsFkzbOhZ63R1xj6cKr7",
+      "address": "PTIT",
+      "phone": "123456"
+    }
+  ],
+  "products": [
+    {
+      "id": "1",
+      "name": "Nike Air Max",
+      "brand": "Nike",
+      "size": [
+        {
+          "size": 40,
+          "stock": 0
+        },
+        {
+          "size": 41,
+          "stock": 0
+        },
+        {
+          "size": 42,
+          "stock": 0
+        },
+        {
+          "size": 43,
+          "stock": 0
+        }
+      ],
+      "price": 150,
+      "description": "Nike Air Max thiết kế hiện đại và phong cách, phù hợp cho mọi hoạt động.",
+      "category": "Sneakers",
+      "gender": "Men",
+      "image": "https://sneakerhs.com/wp-content/uploads/2023/08/giay-nike-air-force-1-low-07-lv8-panda-dx3115-100-rep-11-gia-re.jpg"
+    },
+    {
+      "id": "2",
+      "name": "Adidas Ultraboost",
+      "brand": "Adidas",
+      "size": [
+        {
+          "size": 38,
+          "stock": 4
+        },
+        {
+          "size": 39,
+          "stock": 5
+        },
+        {
+          "size": 40,
+          "stock": 5
+        },
+        {
+          "size": 41,
+          "stock": 5
+        },
+        {
+          "size": 42,
+          "stock": 5
+        }
+      ],
+      "price": 180,
+      "description": "Adidas Ultraboost mang đến sự êm ái và thoải mái vượt trội.",
+      "category": "Running",
+      "gender": "Women",
+      "image": "https://sneakerhs.com/wp-content/uploads/2023/08/giay-nike-air-force-1-low-07-lv8-panda-dx3115-100-rep-11-gia-re.jpg"
+    },
+    {
+      "id": "3",
+      "name": "Puma Suede Classic",
+      "brand": "Puma",
+      "size": [
+        {
+          "size": 39,
+          "stock": 6
+        },
+        {
+          "size": 40,
+          "stock": 5
+        },
+        {
+          "size": 41,
+          "stock": 5
+        },
+        {
+          "size": 42,
+          "stock": 5
+        }
+      ],
+      "price": 90,
+      "description": "Puma Suede Classic với thiết kế cổ điển, dễ phối đồ.",
+      "category": "Casual",
+      "gender": "Men",
+      "image": "https://sneakerhs.com/wp-content/uploads/2023/08/giay-nike-air-force-1-low-07-lv8-panda-dx3115-100-rep-11-gia-re.jpg"
+    },
+    {
+      "id": "4",
+      "name": "Converse Chuck Taylor",
+      "brand": "Converse",
+      "size": [
+        {
+          "size": 36,
+          "stock": 5
+        },
+        {
+          "size": 37,
+          "stock": 5
+        },
+        {
+          "size": 38,
+          "stock": 5
+        },
+        {
+          "size": 39,
+          "stock": 5
+        },
+        {
+          "size": 40,
+          "stock": 5
+        },
+        {
+          "size": 41,
+          "stock": 5
+        },
+        {
+          "size": 42,
+          "stock": 5
+        }
+      ],
+      "price": 70,
+      "description": "Converse Chuck Taylor, một sản phẩm biểu tượng của thương hiệu Converse.",
+      "category": "Sneakers",
+      "gender": "Unisex",
+      "image": "https://sneakerhs.com/wp-content/uploads/2023/08/giay-nike-air-force-1-low-07-lv8-panda-dx3115-100-rep-11-gia-re.jpg"
+    },
+    {
+      "id": "5",
+      "name": "Vans Old Skool",
+      "brand": "Vans",
+      "size": [
+        {
+          "size": 39,
+          "stock": 5
+        },
+        {
+          "size": 40,
+          "stock": 5
+        },
+        {
+          "size": 41,
+          "stock": 7
+        },
+        {
+          "size": 42,
+          "stock": 5
+        },
+        {
+          "size": 43,
+          "stock": 5
+        }
+      ],
+      "price": 60,
+      "description": "Vans Old Skool mang phong cách cổ điển, phù hợp cho mọi dịp.",
+      "category": "Skateboarding",
+      "gender": "Men",
+      "image": "https://sneakerhs.com/wp-content/uploads/2023/08/giay-nike-air-force-1-low-07-lv8-panda-dx3115-100-rep-11-gia-re.jpg"
+    },
+    {
+      "id": "6",
+      "name": "Reebok Classic Leather",
+      "brand": "Reebok",
+      "size": [
+        {
+          "size": 40,
+          "stock": 3
+        },
+        {
+          "size": 41,
+          "stock": 4
+        },
+        {
+          "size": 42,
+          "stock": 4
+        }
+      ],
+      "price": 85,
+      "description": "Reebok Classic Leather có thiết kế cổ điển và tinh tế.",
+      "category": "Casual",
+      "gender": "Women",
+      "image": "https://sneakerhs.com/wp-content/uploads/2023/08/giay-nike-air-force-1-low-07-lv8-panda-dx3115-100-rep-11-gia-re.jpg"
+    },
+    {
+      "id": "7",
+      "name": "New Balance 574",
+      "brand": "New Balance",
+      "size": [
+        {
+          "size": 39,
+          "stock": 2
+        },
+        {
+          "size": 40,
+          "stock": 2
+        },
+        {
+          "size": 41,
+          "stock": 2
+        },
+        {
+          "size": 42,
+          "stock": 1
+        },
+        {
+          "size": 43,
+          "stock": 1
+        }
+      ],
+      "price": 100,
+      "description": "New Balance 574 mang đến sự thoải mái và phong cách đơn giản.",
+      "category": "Sneakers",
+      "gender": "Men",
+      "image": "https://sneakerhs.com/wp-content/uploads/2023/08/giay-nike-air-force-1-low-07-lv8-panda-dx3115-100-rep-11-gia-re.jpg"
+    },
+    {
+      "id": "8",
+      "name": "Asics Gel-Kayano",
+      "brand": "Asics",
+      "size": [
+        {
+          "size": 40,
+          "stock": 2
+        },
+        {
+          "size": 41,
+          "stock": 1
+        },
+        {
+          "size": 42,
+          "stock": 1
+        },
+        {
+          "size": 43,
+          "stock": 1
+        },
+        {
+          "size": 44,
+          "stock": 1
+        }
+      ],
+      "price": 160,
+      "description": "Asics Gel-Kayano hỗ trợ hoàn hảo cho việc chạy bộ với độ êm ái cao.",
+      "category": "Running",
+      "gender": "Women",
+      "image": "https://sneakerhs.com/wp-content/uploads/2023/08/giay-nike-air-force-1-low-07-lv8-panda-dx3115-100-rep-11-gia-re.jpg"
+    },
+    {
+      "id": "9",
+      "name": "Fila Disruptor",
+      "brand": "Fila",
+      "size": [
+        {
+          "size": 36,
+          "stock": 4
+        },
+        {
+          "size": 37,
+          "stock": 4
+        },
+        {
+          "size": 38,
+          "stock": 4
+        },
+        {
+          "size": 39,
+          "stock": 3
+        },
+        {
+          "size": 40,
+          "stock": 3
+        }
+      ],
+      "price": 95,
+      "description": "Fila Disruptor với thiết kế chunky độc đáo, đang là xu hướng.",
+      "category": "Sneakers",
+      "gender": "Unisex",
+      "image": "https://sneakerhs.com/wp-content/uploads/2023/08/giay-nike-air-force-1-low-07-lv8-panda-dx3115-100-rep-11-gia-re.jpg"
+    },
+    {
+      "id": "10",
+      "name": "Under Armour Charged",
+      "brand": "Under Armour",
+      "size": [
+        {
+          "size": 40,
+          "stock": 3
+        },
+        {
+          "size": 41,
+          "stock": 2
+        },
+        {
+          "size": 42,
+          "stock": 2
+        }
+      ],
+      "price": 120,
+      "description": "Under Armour Charged đem lại sự hỗ trợ tuyệt vời cho các vận động viên.",
+      "category": "Running",
+      "gender": "Men",
+      "image": "https://sneakerhs.com/wp-content/uploads/2023/08/giay-nike-air-force-1-low-07-lv8-panda-dx3115-100-rep-11-gia-re.jpg"
+    },
+    {
+      "id": "11",
+      "name": "Jordan 1 Retro High",
+      "brand": "Nike",
+      "size": [
+        {
+          "size": 40,
+          "stock": 0
+        },
+        {
+          "size": 41,
+          "stock": 1
+        },
+        {
+          "size": 42,
+          "stock": 1
+        },
+        {
+          "size": 43,
+          "stock": 1
+        },
+        {
+          "size": 44,
+          "stock": 1
+        }
+      ],
+      "price": 200,
+      "description": "Jordan 1 Retro High là biểu tượng của phong cách và cá tính.",
+      "category": "Sneakers",
+      "gender": "Unisex",
+      "image": "https://sneakerhs.com/wp-content/uploads/2023/08/giay-nike-air-force-1-low-07-lv8-panda-dx3115-100-rep-11-gia-re.jpg"
+    },
+    {
+      "id": "12",
+      "name": "Nike Blazer Mid",
+      "brand": "Nike",
+      "size": [
+        {
+          "size": 38,
+          "stock": 0
+        },
+        {
+          "size": 39,
+          "stock": 1
+        },
+        {
+          "size": 40,
+          "stock": 1
+        },
+        {
+          "size": 41,
+          "stock": 1
+        }
+      ],
+      "price": 105,
+      "description": "Nike Blazer Mid mang lại vẻ ngoài cổ điển và mạnh mẽ.",
+      "category": "Casual",
+      "gender": "Women",
+      "image": "https://sneakerhs.com/wp-content/uploads/2023/08/giay-nike-air-force-1-low-07-lv8-panda-dx3115-100-rep-11-gia-re.jpg"
+    },
+    {
+      "id": "13",
+      "name": "Skechers D'Lites",
+      "brand": "Skechers",
+      "size": [
+        {
+          "size": 37,
+          "stock": 5
+        },
+        {
+          "size": 38,
+          "stock": 5
+        },
+        {
+          "size": 39,
+          "stock": 5
+        },
+        {
+          "size": 40,
+          "stock": 5
+        },
+        {
+          "size": 41,
+          "stock": 5
+        }
+      ],
+      "price": 85,
+      "description": "Skechers D'Lites thiết kế thoải mái, nhẹ nhàng cho ngày dài.",
+      "category": "Casual",
+      "gender": "Women",
+      "image": "https://sneakerhs.com/wp-content/uploads/2023/08/giay-nike-air-force-1-low-07-lv8-panda-dx3115-100-rep-11-gia-re.jpg"
+    },
+    {
+      "id": "14",
+      "name": "Timberland 6-Inch Boots",
+      "brand": "Timberland",
+      "size": [
+        {
+          "size": 39,
+          "stock": 2
+        },
+        {
+          "size": 40,
+          "stock": 2
+        },
+        {
+          "size": 41,
+          "stock": 2
+        },
+        {
+          "size": 42,
+          "stock": 2
+        },
+        {
+          "size": 43,
+          "stock": 2
+        }
+      ],
+      "price": 180,
+      "description": "Timberland 6-Inch Boots chống thấm nước, bền bỉ và phong cách.",
+      "category": "Boots",
+      "gender": "Men",
+      "image": "https://sneakerhs.com/wp-content/uploads/2023/08/giay-nike-air-force-1-low-07-lv8-panda-dx3115-100-rep-11-gia-re.jpg"
+    },
+    {
+      "id": "15",
+      "name": "Merrell Moab 2",
+      "brand": "Merrell",
+      "size": [
+        {
+          "size": 40,
+          "stock": 3
+        },
+        {
+          "size": 41,
+          "stock": 2
+        },
+        {
+          "size": 42,
+          "stock": 2
+        },
+        {
+          "size": 43,
+          "stock": 2
+        }
+      ],
+      "price": 140,
+      "description": "Merrell Moab 2 là đôi giày hoàn hảo cho các chuyến dã ngoại và leo núi.",
+      "category": "Hiking",
+      "gender": "Men",
+      "image": "https://sneakerhs.com/wp-content/uploads/2023/08/giay-nike-air-force-1-low-07-lv8-panda-dx3115-100-rep-11-gia-re.jpg"
+    },
+    {
+      "id": "16",
+      "name": "Nike Air Force 1",
+      "brand": "Nike",
+      "size": [
+        {
+          "size": 40,
+          "stock": 2
+        },
+        {
+          "size": 41,
+          "stock": 2
+        },
+        {
+          "size": 42,
+          "stock": 3
+        },
+        {
+          "size": 43,
+          "stock": 3
+        }
+      ],
+      "price": 110,
+      "description": "Nike Air Force 1 nổi bật với thiết kế cổ điển và phong cách.",
+      "category": "Sneakers",
+      "gender": "Unisex",
+      "image": "https://sneakerhs.com/wp-content/uploads/2023/08/giay-nike-air-force-1-low-07-lv8-panda-dx3115-100-rep-11-gia-re.jpg"
+    },
+    {
+      "id": "17",
+      "name": "Adidas NMD R1",
+      "brand": "Adidas",
+      "size": [
+        {
+          "size": 40,
+          "stock": 3
+        },
+        {
+          "size": 41,
+          "stock": 3
+        },
+        {
+          "size": 42,
+          "stock": 2
+        }
+      ],
+      "price": 170,
+      "description": "Adidas NMD R1 mang phong cách hiện đại và thoải mái.",
+      "category": "Running",
+      "gender": "Men",
+      "image": "https://sneakerhs.com/wp-content/uploads/2023/08/giay-nike-air-force-1-low-07-lv8-panda-dx3115-100-rep-11-gia-re.jpg"
+    },
+    {
+      "id": "18",
+      "name": "Puma RS-X",
+      "brand": "Puma",
+      "size": [
+        {
+          "size": 39,
+          "stock": 4
+        },
+        {
+          "size": 40,
+          "stock": 4
+        },
+        {
+          "size": 41,
+          "stock": 3
+        },
+        {
+          "size": 42,
+          "stock": 3
+        }
+      ],
+      "price": 130,
+      "description": "Puma RS-X với thiết kế năng động và hiện đại.",
+      "category": "Sneakers",
+      "gender": "Unisex",
+      "image": "https://sneakerhs.com/wp-content/uploads/2023/08/giay-nike-air-force-1-low-07-lv8-panda-dx3115-100-rep-11-gia-re.jpg"
+    },
+    {
+      "id": "19",
+      "name": "Asics Gel-Nimbus",
+      "brand": "Asics",
+      "size": [
+        {
+          "size": 40,
+          "stock": 3
+        },
+        {
+          "size": 41,
+          "stock": 2
+        },
+        {
+          "size": 42,
+          "stock": 2
+        },
+        {
+          "size": 43,
+          "stock": 1
+        }
+      ],
+      "price": 150,
+      "description": "Asics Gel-Nimbus được thiết kế đặc biệt cho người chạy bộ.",
+      "category": "Running",
+      "gender": "Women",
+      "image": "https://sneakerhs.com/wp-content/uploads/2023/08/giay-nike-air-force-1-low-07-lv8-panda-dx3115-100-rep-11-gia-re.jpg"
+    },
+    {
+      "id": "20",
+      "name": "Converse Run Star Hike",
+      "brand": "Converse",
+      "size": [
+        {
+          "size": 36,
+          "stock": 2
+        },
+        {
+          "size": 37,
+          "stock": 2
+        },
+        {
+          "size": 38,
+          "stock": 2
+        },
+        {
+          "size": 39,
+          "stock": 2
+        },
+        {
+          "size": 40,
+          "stock": 2
+        }
+      ],
+      "price": 95,
+      "description": "Converse Run Star Hike với thiết kế đế dày độc đáo.",
+      "category": "Casual",
+      "gender": "Women",
+      "image": "https://sneakerhs.com/wp-content/uploads/2023/08/giay-nike-air-force-1-low-07-lv8-panda-dx3115-100-rep-11-gia-re.jpg"
+    },
+    {
+      "id": "21",
+      "name": "Vans Sk8-Hi",
+      "brand": "Vans",
+      "size": [
+        {
+          "size": 39,
+          "stock": 4
+        },
+        {
+          "size": 40,
+          "stock": 4
+        },
+        {
+          "size": 41,
+          "stock": 3
+        },
+        {
+          "size": 42,
+          "stock": 3
+        },
+        {
+          "size": 43,
+          "stock": 2
+        }
+      ],
+      "price": 75,
+      "description": "Vans Sk8-Hi, mẫu giày cổ cao phù hợp cho phong cách đường phố.",
+      "category": "Skateboarding",
+      "gender": "Men",
+      "image": "https://sneakerhs.com/wp-content/uploads/2023/08/giay-nike-air-force-1-low-07-lv8-panda-dx3115-100-rep-11-gia-re.jpg"
+    },
+    {
+      "id": "22",
+      "name": "New Balance 997",
+      "brand": "New Balance",
+      "size": [
+        {
+          "size": 40,
+          "stock": 2
+        },
+        {
+          "size": 41,
+          "stock": 3
+        },
+        {
+          "size": 42,
+          "stock": 3
+        },
+        {
+          "size": 43,
+          "stock": 2
+        }
+      ],
+      "price": 130,
+      "description": "New Balance 997 mang lại cảm giác thoải mái và thiết kế đơn giản.",
+      "category": "Casual",
+      "gender": "Unisex",
+      "image": "https://sneakerhs.com/wp-content/uploads/2023/08/giay-nike-air-force-1-low-07-lv8-panda-dx3115-100-rep-11-gia-re.jpg"
+    },
+    {
+      "id": "23",
+      "name": "Reebok Club C 85",
+      "brand": "Reebok",
+      "size": [
+        {
+          "size": 40,
+          "stock": 3
+        },
+        {
+          "size": 41,
+          "stock": 3
+        },
+        {
+          "size": 42,
+          "stock": 3
+        },
+        {
+          "size": 43,
+          "stock": 1
+        }
+      ],
+      "price": 90,
+      "description": "Reebok Club C 85 với thiết kế cổ điển và dễ phối đồ.",
+      "category": "Casual",
+      "gender": "Men",
+      "image": "https://sneakerhs.com/wp-content/uploads/2023/08/giay-nike-air-force-1-low-07-lv8-panda-dx3115-100-rep-11-gia-re.jpg"
+    },
+    {
+      "id": "24",
+      "name": "Under Armour HOVR Phantom",
+      "brand": "Under Armour",
+      "size": [
+        {
+          "size": 40,
+          "stock": 2
+        },
+        {
+          "size": 41,
+          "stock": 2
+        },
+        {
+          "size": 42,
+          "stock": 2
+        },
+        {
+          "size": 43,
+          "stock": 2
+        }
+      ],
+      "price": 140,
+      "description": "Under Armour HOVR Phantom hỗ trợ tốt cho các hoạt động thể thao.",
+      "category": "Running",
+      "gender": "Unisex",
+      "image": "https://sneakerhs.com/wp-content/uploads/2023/08/giay-nike-air-force-1-low-07-lv8-panda-dx3115-100-rep-11-gia-re.jpg"
+    },
+    {
+      "id": "25",
+      "name": "Nike React Infinity Run",
+      "brand": "Nike",
+      "size": [
+        {
+          "size": 39,
+          "stock": 2
+        },
+        {
+          "size": 40,
+          "stock": 3
+        },
+        {
+          "size": 41,
+          "stock": 2
+        },
+        {
+          "size": 42,
+          "stock": 3
+        },
+        {
+          "size": 43,
+          "stock": 2
+        }
+      ],
+      "price": 160,
+      "description": "Nike React Infinity Run được thiết kế cho các vận động viên chạy đường dài.",
+      "category": "Running",
+      "gender": "Men",
+      "image": "https://sneakerhs.com/wp-content/uploads/2023/08/giay-nike-air-force-1-low-07-lv8-panda-dx3115-100-rep-11-gia-re.jpg"
+    },
+    {
+      "id": "26",
+      "name": "Adidas Yeezy Boost 350",
+      "brand": "Adidas",
+      "size": [
+        {
+          "size": 39,
+          "stock": 2
+        },
+        {
+          "size": 40,
+          "stock": 2
+        },
+        {
+          "size": 41,
+          "stock": 2
+        },
+        {
+          "size": 42,
+          "stock": 2
+        },
+        {
+          "size": 43,
+          "stock": 2
+        }
+      ],
+      "price": 220,
+      "description": "Adidas Yeezy Boost 350 nổi bật với thiết kế độc đáo và thoải mái.",
+      "category": "Sneakers",
+      "gender": "Unisex",
+      "image": "https://sneakerhs.com/wp-content/uploads/2023/08/giay-nike-air-force-1-low-07-lv8-panda-dx3115-100-rep-11-gia-re.jpg"
+    },
+    {
+      "id": "27",
+      "name": "Puma Future Rider",
+      "brand": "Puma",
+      "size": [
+        {
+          "size": 39,
+          "stock": 3
+        },
+        {
+          "size": 40,
+          "stock": 3
+        },
+        {
+          "size": 41,
+          "stock": 2
+        },
+        {
+          "size": 42,
+          "stock": 2
+        }
+      ],
+      "price": 110,
+      "description": "Puma Future Rider mang phong cách cổ điển và thoải mái.",
+      "category": "Casual",
+      "gender": "Women",
+      "image": "https://sneakerhs.com/wp-content/uploads/2023/08/giay-nike-air-force-1-low-07-lv8-panda-dx3115-100-rep-11-gia-re.jpg"
+    },
+    {
+      "id": "28",
+      "name": "New Balance Fresh Foam 1080",
+      "brand": "New Balance",
+      "size": [
+        {
+          "size": 40,
+          "stock": 2
+        },
+        {
+          "size": 41,
+          "stock": 2
+        },
+        {
+          "size": 42,
+          "stock": 2
+        },
+        {
+          "size": 43,
+          "stock": 2
+        },
+        {
+          "size": 44,
+          "stock": 2
+        }
+      ],
+      "price": 140,
+      "description": "New Balance Fresh Foam 1080 mang đến sự thoải mái cho các buổi chạy dài.",
+      "category": "Running",
+      "gender": "Men",
+      "image": "https://sneakerhs.com/wp-content/uploads/2023/08/giay-nike-air-force-1-low-07-lv8-panda-dx3115-100-rep-11-gia-re.jpg"
+    },
+    {
+      "id": "29",
+      "name": "Under Armour Curry 7",
+      "brand": "Under Armour",
+      "size": [
+        {
+          "size": 39,
+          "stock": 2
+        },
+        {
+          "size": 40,
+          "stock": 2
+        },
+        {
+          "size": 41,
+          "stock": 2
+        },
+        {
+          "size": 42,
+          "stock": 3
+        }
+      ],
+      "price": 150,
+      "description": "Under Armour Curry 7 phù hợp cho các hoạt động bóng rổ và thể thao.",
+      "category": "Basketball",
+      "gender": "Men",
+      "image": "https://sneakerhs.com/wp-content/uploads/2023/08/giay-nike-air-force-1-low-07-lv8-panda-dx3115-100-rep-11-gia-re.jpg"
+    },
+    {
+      "id": "30",
+      "name": "Fila Ray Tracer",
+      "brand": "Fila",
+      "size": [
+        {
+          "size": 37,
+          "stock": 2
+        },
+        {
+          "size": 38,
+          "stock": 2
+        },
+        {
+          "size": 39,
+          "stock": 2
+        },
+        {
+          "size": 40,
+          "stock": 2
+        }
+      ],
+      "price": 90,
+      "description": "Fila Ray Tracer với thiết kế trẻ trung, phù hợp cho các bạn trẻ.",
+      "category": "Sneakers",
+      "gender": "Women",
+      "image": "https://sneakerhs.com/wp-content/uploads/2023/08/giay-nike-air-force-1-low-07-lv8-panda-dx3115-100-rep-11-gia-re.jpg"
+    },
+    {
+      "id": "31",
+      "name": "Converse Chuck 70",
+      "brand": "Converse",
+      "size": [
+        {
+          "size": 36,
+          "stock": 3
+        },
+        {
+          "size": 37,
+          "stock": 3
+        },
+        {
+          "size": 38,
+          "stock": 3
+        },
+        {
+          "size": 39,
+          "stock": 3
+        },
+        {
+          "size": 40,
+          "stock": 3
+        }
+      ],
+      "price": 85,
+      "description": "Converse Chuck 70 với thiết kế cổ điển, thích hợp cho mọi phong cách.",
+      "category": "Casual",
+      "gender": "Unisex",
+      "image": "https://sneakerhs.com/wp-content/uploads/2023/08/giay-nike-air-force-1-low-07-lv8-panda-dx3115-100-rep-11-gia-re.jpg"
+    },
+    {
+      "id": "32",
+      "name": "Reebok Zig Kinetica",
+      "brand": "Reebok",
+      "size": [
+        {
+          "size": 40,
+          "stock": 3
+        },
+        {
+          "size": 41,
+          "stock": 3
+        },
+        {
+          "size": 42,
+          "stock": 3
+        },
+        {
+          "size": 43,
+          "stock": 3
+        }
+      ],
+      "price": 120,
+      "description": "Reebok Zig Kinetica nổi bật với thiết kế năng động và thoải mái.",
+      "category": "Training",
+      "gender": "Men",
+      "image": "https://sneakerhs.com/wp-content/uploads/2023/08/giay-nike-air-force-1-low-07-lv8-panda-dx3115-100-rep-11-gia-re.jpg"
+    },
+    {
+      "id": "33",
+      "name": "Nike Air Zoom Pegasus 37",
+      "brand": "Nike",
+      "size": [
+        {
+          "size": 39,
+          "stock": 2
+        },
+        {
+          "size": 40,
+          "stock": 3
+        },
+        {
+          "size": 41,
+          "stock": 2
+        },
+        {
+          "size": 42,
+          "stock": 3
+        }
+      ],
+      "price": 130,
+      "description": "Nike Air Zoom Pegasus 37 mang đến hiệu suất và độ êm ái tuyệt vời.",
+      "category": "Running",
+      "gender": "Women",
+      "image": "https://sneakerhs.com/wp-content/uploads/2023/08/giay-nike-air-force-1-low-07-lv8-panda-dx3115-100-rep-11-gia-re.jpg"
+    },
+    {
+      "id": "34",
+      "name": "Adidas Superstar",
+      "brand": "Adidas",
+      "size": [
+        {
+          "size": 38,
+          "stock": 3
+        },
+        {
+          "size": 39,
+          "stock": 3
+        },
+        {
+          "size": 40,
+          "stock": 3
+        },
+        {
+          "size": 41,
+          "stock": 3
+        }
+      ],
+      "price": 90,
+      "description": "Adidas Superstar là biểu tượng thời trang với thiết kế kinh điển.",
+      "category": "Casual",
+      "gender": "Unisex",
+      "image": "https://sneakerhs.com/wp-content/uploads/2023/08/giay-nike-air-force-1-low-07-lv8-panda-dx3115-100-rep-11-gia-re.jpg"
+    },
+    {
+      "id": "35",
+      "name": "Vans Sk8-Hi",
+      "brand": "Vans",
+      "size": [
+        {
+          "size": 39,
+          "stock": 2
+        },
+        {
+          "size": 40,
+          "stock": 3
+        },
+        {
+          "size": 41,
+          "stock": 3
+        },
+        {
+          "size": 42,
+          "stock": 2
+        }
+      ],
+      "price": 70,
+      "description": "Vans Sk8-Hi mang đến phong cách cổ điển và thoải mái cho người dùng.",
+      "category": "Skateboarding",
+      "gender": "Unisex",
+      "image": "https://sneakerhs.com/wp-content/uploads/2023/08/giay-nike-air-force-1-low-07-lv8-panda-dx3115-100-rep-11-gia-re.jpg"
+    },
+    {
+      "id": "36",
+      "name": "Hoka One One Bondi",
+      "brand": "Hoka One One",
+      "size": [
+        {
+          "size": 40,
+          "stock": 2
+        },
+        {
+          "size": 41,
+          "stock": 3
+        },
+        {
+          "size": 42,
+          "stock": 2
+        },
+        {
+          "size": 43,
+          "stock": 2
+        }
+      ],
+      "price": 160,
+      "description": "Hoka One One Bondi nổi bật với đệm êm ái, phù hợp cho việc chạy dài.",
+      "category": "Running",
+      "gender": "Men",
+      "image": "https://sneakerhs.com/wp-content/uploads/2023/08/giay-nike-air-force-1-low-07-lv8-panda-dx3115-100-rep-11-gia-re.jpg"
+    },
+    {
+      "id": "37",
+      "name": "Salomon Speedcross",
+      "brand": "Salomon",
+      "size": [
+        {
+          "size": 39,
+          "stock": 2
+        },
+        {
+          "size": 40,
+          "stock": 2
+        },
+        {
+          "size": 41,
+          "stock": 3
+        },
+        {
+          "size": 42,
+          "stock": 2
+        }
+      ],
+      "price": 140,
+      "description": "Salomon Speedcross là đôi giày lý tưởng cho các hoạt động chạy địa hình.",
+      "category": "Hiking",
+      "gender": "Unisex",
+      "image": "https://sneakerhs.com/wp-content/uploads/2023/08/giay-nike-air-force-1-low-07-lv8-panda-dx3115-100-rep-11-gia-re.jpg"
+    },
+    {
+      "id": "38",
+      "name": "Nike Air Max 90",
+      "brand": "Nike",
+      "size": [
+        {
+          "size": 39,
+          "stock": 2
+        },
+        {
+          "size": 40,
+          "stock": 3
+        },
+        {
+          "size": 41,
+          "stock": 3
+        },
+        {
+          "size": 42,
+          "stock": 2
+        }
+      ],
+      "price": 130,
+      "description": "Nike Air Max 90 mang đến phong cách cổ điển và sự thoải mái tối ưu.",
+      "category": "Sneakers",
+      "gender": "Women",
+      "image": "https://sneakerhs.com/wp-content/uploads/2023/08/giay-nike-air-force-1-low-07-lv8-panda-dx3115-100-rep-11-gia-re.jpg"
+    },
+    {
+      "id": "39",
+      "name": "On Cloudstratus",
+      "brand": "On",
+      "size": [
+        {
+          "size": 40,
+          "stock": 2
+        },
+        {
+          "size": 41,
+          "stock": 3
+        },
+        {
+          "size": 42,
+          "stock": 2
+        }
+      ],
+      "price": 170,
+      "description": "On Cloudstratus được thiết kế đặc biệt cho độ bền và hiệu suất trong chạy bộ.",
+      "category": "Running",
+      "gender": "Men",
+      "image": "https://sneakerhs.com/wp-content/uploads/2023/08/giay-nike-air-force-1-low-07-lv8-panda-dx3115-100-rep-11-gia-re.jpg"
+    },
+    {
+      "id": "40",
+      "name": "Reebok Club C",
+      "brand": "Reebok",
+      "size": [
+        {
+          "size": 37,
+          "stock": 3
+        },
+        {
+          "size": 38,
+          "stock": 3
+        },
+        {
+          "size": 39,
+          "stock": 2
+        },
+        {
+          "size": 40,
+          "stock": 2
+        }
+      ],
+      "price": 75,
+      "description": "Reebok Club C với thiết kế cổ điển, phù hợp cho mọi trang phục.",
+      "category": "Casual",
+      "gender": "Unisex",
+      "image": "https://sneakerhs.com/wp-content/uploads/2023/08/giay-nike-air-force-1-low-07-lv8-panda-dx3115-100-rep-11-gia-re.jpg"
+    }
+  ],
+  "categories": [
+    {
+      "id": "1",
+      "name": "Sneakers"
+    },
+    {
+      "id": "2",
+      "name": "Running"
+    },
+    {
+      "id": "3",
+      "name": "Casual"
+    },
+    {
+      "id": "4",
+      "name": "Skateboarding"
+    },
+    {
+      "id": "5",
+      "name": "Hiking"
+    },
+    {
+      "id": "6",
+      "name": "Boots"
+    }
+  ],
+  "brands": [
+    {
+      "id": "1",
+      "name": "Nike"
+    },
+    {
+      "id": "2",
+      "name": "Adidas"
+    },
+    {
+      "id": "3",
+      "name": "Puma"
+    },
+    {
+      "id": "4",
+      "name": "Converse"
+    },
+    {
+      "id": "5",
+      "name": "Vans"
+    },
+    {
+      "id": "6",
+      "name": "Reebok"
+    },
+    {
+      "id": "7",
+      "name": "New Balance"
+    },
+    {
+      "id": "8",
+      "name": "Asics"
+    },
+    {
+      "id": "9",
+      "name": "Fila"
+    },
+    {
+      "id": "10",
+      "name": "Under Armour"
+    },
+    {
+      "id": "11",
+      "name": "Jordan"
+    },
+    {
+      "id": "12",
+      "name": "Skechers"
+    },
+    {
+      "id": "13",
+      "name": "Timberland"
+    },
+    {
+      "id": "14",
+      "name": "Merrell"
+    },
+    {
+      "id": "15",
+      "name": "Hoka One One"
+    },
+    {
+      "id": "16",
+      "name": "Salomon"
+    },
+    {
+      "id": "17",
+      "name": "On"
+    }
+  ],
+  "carts": [
+    {
+      "id": "1",
+      "userId": "7",
+      "productId": "1",
+      "productImage": "https://sneakerhs.com/wp-content/uploads/2023/08/giay-nike-air-force-1-low-07-lv8-panda-dx3115-100-rep-11-gia-re.jpg",
+      "productName": "Nike Air Max",
+      "productDescription": "Nike Air Max thiết kế hiện đại và phong cách, phù hợp cho mọi hoạt động.",
+      "productBrand": "Nike",
+      "productCategory": "Sneakers",
+      "productPrice": 150,
+      "productQuantity": 1,
+      "productSize": 41
+    },
+    {
+      "id": "2",
+      "userId": "8",
+      "productId": "1",
+      "productImage": "https://sneakerhs.com/wp-content/uploads/2023/08/giay-nike-air-force-1-low-07-lv8-panda-dx3115-100-rep-11-gia-re.jpg",
+      "productName": "Nike Air Max",
+      "productDescription": "Nike Air Max thiết kế hiện đại và phong cách, phù hợp cho mọi hoạt động.",
+      "productBrand": "Nike",
+      "productCategory": "Sneakers",
+      "productPrice": 150,
+      "productQuantity": 1,
+      "productSize": 42
+    }
+  ],
+  "history": [
+    {
+      "id": "2",
+      "userId": "6",
+      "productId": "1",
+      "productImage": "https://sneakerhs.com/wp-content/uploads/2023/08/giay-nike-air-force-1-low-07-lv8-panda-dx3115-100-rep-11-gia-re.jpg",
+      "productName": "Nike Air Max",
+      "productDescription": "Nike Air Max thiết kế hiện đại và phong cách, phù hợp cho mọi hoạt động.",
+      "productBrand": "Nike",
+      "productCategory": "Sneakers",
+      "productPrice": 150,
+      "productQuantity": 1,
+      "productSize": 41,
+      "status": "Đã thanh toán",
+      "time": "Thứ Thứ Hai, ngày 11 tháng 11 năm 2024, 23:1"
+    },
+    {
+      "id": "2",
+      "userId": "7",
+      "productId": "1",
+      "productImage": "https://sneakerhs.com/wp-content/uploads/2023/08/giay-nike-air-force-1-low-07-lv8-panda-dx3115-100-rep-11-gia-re.jpg",
+      "productName": "Nike Air Max",
+      "productDescription": "Nike Air Max thiết kế hiện đại và phong cách, phù hợp cho mọi hoạt động.",
+      "productBrand": "Nike",
+      "productCategory": "Sneakers",
+      "productPrice": 150,
+      "productQuantity": 1,
+      "productSize": 42,
+      "status": "Đã thanh toán",
+      "time": "Thứ Thứ Hai, ngày 11 tháng 11 năm 2024, 23:2"
+    },
+    {
+      "id": "1",
+      "userId": "7",
+      "productId": "1",
+      "productImage": "https://sneakerhs.com/wp-content/uploads/2023/08/giay-nike-air-force-1-low-07-lv8-panda-dx3115-100-rep-11-gia-re.jpg",
+      "productName": "Nike Air Max",
+      "productDescription": "Nike Air Max thiết kế hiện đại và phong cách, phù hợp cho mọi hoạt động.",
+      "productBrand": "Nike",
+      "productCategory": "Sneakers",
+      "productPrice": 150,
+      "productQuantity": 1,
+      "productSize": 41,
+      "status": "Đã thanh toán",
+      "time": "Thứ Thứ Hai, ngày 11 tháng 11 năm 2024, 23:2"
+    },
+    {
+      "id": "2",
+      "userId": "6",
+      "productId": "1",
+      "productImage": "https://sneakerhs.com/wp-content/uploads/2023/08/giay-nike-air-force-1-low-07-lv8-panda-dx3115-100-rep-11-gia-re.jpg",
+      "productName": "Nike Air Max",
+      "productDescription": "Nike Air Max thiết kế hiện đại và phong cách, phù hợp cho mọi hoạt động.",
+      "productBrand": "Nike",
+      "productCategory": "Sneakers",
+      "productPrice": 150,
+      "productQuantity": 1,
+      "productSize": 43,
+      "status": "Đã thanh toán",
+      "time": "Thứ Thứ Hai, ngày 11 tháng 11 năm 2024, 23:9"
+    },
+    {
+      "id": "2",
+      "userId": "7",
+      "productId": "2",
+      "productImage": "https://sneakerhs.com/wp-content/uploads/2023/08/giay-nike-air-force-1-low-07-lv8-panda-dx3115-100-rep-11-gia-re.jpg",
+      "productName": "Adidas Ultraboost",
+      "productDescription": "Adidas Ultraboost mang đến sự êm ái và thoải mái vượt trội.",
+      "productBrand": "Adidas",
+      "productCategory": "Running",
+      "productPrice": 180,
+      "productQuantity": 1,
+      "productSize": 38,
+      "status": "Đã thanh toán",
+      "time": "Thứ Thứ Hai, ngày 11 tháng 11 năm 2024, 23:9"
+    },
+    {
+      "id": "1",
+      "userId": "7",
+      "productId": "1",
+      "productImage": "https://sneakerhs.com/wp-content/uploads/2023/08/giay-nike-air-force-1-low-07-lv8-panda-dx3115-100-rep-11-gia-re.jpg",
+      "productName": "Nike Air Max",
+      "productDescription": "Nike Air Max thiết kế hiện đại và phong cách, phù hợp cho mọi hoạt động.",
+      "productBrand": "Nike",
+      "productCategory": "Sneakers",
+      "productPrice": 150,
+      "productQuantity": 1,
+      "productSize": 43,
+      "status": "Đã thanh toán",
+      "time": "Thứ Thứ Hai, ngày 11 tháng 11 năm 2024, 23:11"
+    },
+    {
+      "id": "2",
+      "userId": "6",
+      "productId": "1",
+      "productImage": "https://sneakerhs.com/wp-content/uploads/2023/08/giay-nike-air-force-1-low-07-lv8-panda-dx3115-100-rep-11-gia-re.jpg",
+      "productName": "Nike Air Max",
+      "productDescription": "Nike Air Max thiết kế hiện đại và phong cách, phù hợp cho mọi hoạt động.",
+      "productBrand": "Nike",
+      "productCategory": "Sneakers",
+      "productPrice": 150,
+      "productQuantity": 1,
+      "productSize": 40,
+      "status": "Đã thanh toán",
+      "time": "Thứ Thứ Hai, ngày 11 tháng 11 năm 2024, 23:18"
+    },
+    {
+      "id": "2",
+      "userId": "8",
+      "productId": "1",
+      "productImage": "https://sneakerhs.com/wp-content/uploads/2023/08/giay-nike-air-force-1-low-07-lv8-panda-dx3115-100-rep-11-gia-re.jpg",
+      "productName": "Nike Air Max",
+      "productDescription": "Nike Air Max thiết kế hiện đại và phong cách, phù hợp cho mọi hoạt động.",
+      "productBrand": "Nike",
+      "productCategory": "Sneakers",
+      "productPrice": 150,
+      "productQuantity": 1,
+      "productSize": 41,
+      "status": "Đã thanh toán",
+      "time": "Thứ Thứ Ba, ngày 12 tháng 11 năm 2024, 0:40"
+    },
+    {
+      "id": "3",
+      "userId": "6",
+      "productId": "1",
+      "productImage": "https://sneakerhs.com/wp-content/uploads/2023/08/giay-nike-air-force-1-low-07-lv8-panda-dx3115-100-rep-11-gia-re.jpg",
+      "productName": "Nike Air Max",
+      "productDescription": "Nike Air Max thiết kế hiện đại và phong cách, phù hợp cho mọi hoạt động.",
+      "productBrand": "Nike",
+      "productCategory": "Sneakers",
+      "productPrice": 150,
+      "productQuantity": 1,
+      "productSize": 42,
+      "status": "Đã thanh toán",
+      "time": "Thứ Thứ Ba, ngày 12 tháng 11 năm 2024, 16:6"
+    }
+  ],
+  "contacts": [
+    {
+      "id": "1",
+      "fullName": "Nguyễn Hoàng Hiệp ",
+      "email": "hiep2804@gmail.com",
+      "phone": "123",
+      "content": "abcd"
+    }
+  ]
+}

@@ -1,0 +1,121 @@
+// Reset CSS cho header
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30px;
+  background-color: #001529;
+  color: #fff;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 64px;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #002a3b; // Tạo hiệu ứng hover cho header
+  }
+
+  &__logo {
+    font-size: 24px;
+    font-weight: bold;
+    transition: color 0.3s;
+
+    a {
+      color: #fff;
+      text-decoration: none;
+
+      &:hover {
+        color: #40a9ff; // Màu khi hover
+      }
+    }
+  }
+
+  &__menu {
+    display: flex;
+    gap: 40px;
+
+    a {
+      color: #fff;
+      font-size: 18px;
+      font-weight: 500;
+      text-decoration: none;
+      position: relative;
+      transition: color 0.3s;
+
+      &:hover {
+        color: #40a9ff;
+      }
+
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: #40a9ff;
+        transform: scaleX(0);
+        transition: transform 0.3s;
+      }
+
+      &:hover::after {
+        transform: scaleX(1);
+      }
+    }
+  }
+
+  &__action {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    .header__cart,
+    .header__profile {
+      button,
+      a {
+        background: none;
+        border: none;
+        color: #fff;
+        font-size: 20px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        transition: color 0.3s;
+
+        &:hover {
+          color: #40a9ff;
+        }
+      }
+    }
+  }
+}
+
+// CSS cho nội dung
+.content {
+  padding-top: 80px; // Khoảng trống để không bị header che
+  min-height: calc(100vh - 144px);
+  padding: 20px;
+  background-color: #f6f8fa;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #eef3f7; // Tạo hiệu ứng hover nhẹ cho background
+  }
+}
+
+// CSS cho footer
+footer {
+  text-align: center;
+  background-color: #001529;
+  color: #fff;
+  padding: 20px 0;
+  font-size: 14px;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #002a3b;
+  }
+}
