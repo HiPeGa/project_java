@@ -19,19 +19,25 @@ function Login() {
 
   const checkInfomation = async (email, password) => {
     const response = await fetch(`http://localhost:3002/users?email=${email}&password=${password}`);
-    return response.json();
+    const data = await response.json();
+    return data[0];
   }
 
   const handleSubmit = async (e) => {
     const response = await checkInfomation(e.email, e.password);
-    if(response.length > 0){
-      sessionStorage.setItem('token', response[0].token);
-      sessionStorage.setItem('id', response[0].id);
-      dispatch(loginAccount());
-      openNotification('Thành công', 'Đăng nhập thành công', 'success')
-      setTimeout(() => {
-        navigate('/');
-      }, 500)
+    if(response){
+      if(response.isActive){
+        sessionStorage.setItem('token', response.token);
+        sessionStorage.setItem('id', response.id);
+        dispatch(loginAccount());
+        openNotification('Thành công', 'Đăng nhập thành công', 'success')
+        setTimeout(() => {
+          navigate('/');
+        }, 500)
+      }
+      else{
+        openNotification('Thất bại', 'Tài khoản của bạn đã bị vô hiệu hóa', 'error');
+      }
     }
     else{
       openNotification('Thất bại', 'Tài khoản hoặc mật khẩu không chính xác', 'error');

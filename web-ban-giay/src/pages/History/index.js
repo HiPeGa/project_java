@@ -85,7 +85,15 @@ function History() {
       key: 'status',
       render: (_, record) => {
         return (
-          <Tag color="#87d068">{record.status}</Tag>
+          <>
+            {
+              record.status === 'Chờ xử lý' ? (
+                <Tag color="yellow">{record.status}</Tag>
+              ) : (
+                <Tag color="#87d068">{record.status}</Tag>
+              )
+            }
+          </>
         )
       }
     }

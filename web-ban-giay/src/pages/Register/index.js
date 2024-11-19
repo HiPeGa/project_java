@@ -28,13 +28,13 @@ function Register() {
 
   const navigate = useNavigate();
 
-  const registerAccount = async (fullName, email, password, token, id, address, phone) => {
+  const registerAccount = async (fullName, email, password, token, address, phone, isActive) => {
     const response = await fetch('http://localhost:3002/users', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ fullName, email, password, role: "customer", token, id, address, phone})
+      body: JSON.stringify({ fullName, email, password, role: "customer", token, address, phone, isActive})
     })
     return await response.json();
   }
@@ -60,7 +60,7 @@ function Register() {
       openNotification('Thất bại', 'Email đã tồn tại', 'error');
     }
     else{
-      const response = await registerAccount(e.fullName, e.email, e.password, token , user.length+1+"", null, null); 
+      const response = await registerAccount(e.fullName, e.email, e.password, token , null, null, true); 
       if(response){
         openNotification('Thành công', 'Đăng ký thành công', 'success')
         setTimeout(() => {

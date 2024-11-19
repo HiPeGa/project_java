@@ -41,13 +41,13 @@ const Contact = () => {
   }
 
   const onFinish = async (e) => {
-    const id = contacts.length + 1 + "";
     const fullName = e.name;
     const email = e.email;
     const phone = e.phone;
     const content = e.message;
+    const isRead = false;
 
-    const contact = { id, fullName, email, phone, content };
+    const contact = { fullName, email, phone, content, isRead };
 
     const response = await postContact(contact);
 

@@ -96,7 +96,6 @@ function Home() {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        id: carts.length + 1 + "",
         userId: user.id,
         productId: productIsChoose.id,
         productImage: productIsChoose.image,

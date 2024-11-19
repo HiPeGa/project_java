@@ -119,10 +119,10 @@ function Profile() {
       phone: e.phone,
       address: e.address
     }
-    console.log(new_user);
+    sessionStorage.setItem('address', new_user.address)
 
     const response = await patchUser(new_user);
-    console.log(response);
+    setIsModalVisible(false);
   };
 
 
