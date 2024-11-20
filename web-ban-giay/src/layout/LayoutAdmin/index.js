@@ -24,7 +24,6 @@ function LayoutAdmin() {
           <Menu
             theme="dark"
             mode="inline"
-            defaultSelectedKeys={['1']}
             items={[
               {
                 key: '1',

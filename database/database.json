@@ -20,7 +20,7 @@
       "token": "d3f7a8b92c41e7e4f6g8",
       "address": "123 Maple Street, Springfield",
       "phone": "123-456-7890",
-      "isActive": false
+      "isActive": true
     },
     {
       "id": "2",
@@ -70,11 +70,11 @@
       "id": "8",
       "fullName": "Nguyen Hoang Hiep",
       "email": "hiep2804@gmail.com",
-      "password": "1234",
+      "password": "123",
       "role": "customer",
       "token": "IsFkzbOhZ63R1xj6cKr7",
       "address": "PTIT",
-      "phone": "123456",
+      "phone": "1",
       "isActive": true
     },
     {
@@ -1222,50 +1222,49 @@
       "size": [
         {
           "size": 39,
-          "stock": 2
+          "stock": 1
         },
         {
           "size": 40,
-          "stock": 3
+          "stock": 1
         },
         {
           "size": 41,
-          "stock": 3
+          "stock": 1
         },
         {
           "size": 42,
-          "stock": 2
+          "stock": 0
         }
       ],
       "price": 130,
-      "description": "Nike Air Max 90 mang đến phong cách cổ điển và sự thoải mái tối ưu.",
+      "description": "1234",
       "category": "Sneakers",
       "gender": "Women",
       "image": "https://sneakerhs.com/wp-content/uploads/2023/08/giay-nike-air-force-1-low-07-lv8-panda-dx3115-100-rep-11-gia-re.jpg"
     },
     {
-      "id": "39",
-      "name": "On Cloudstratus",
-      "brand": "On",
+      "id": "12b2",
+      "name": "hiep",
+      "image": "1234",
+      "description": "12434",
+      "brand": "124",
+      "category": "1",
+      "price": 214,
       "size": [
         {
-          "size": 40,
-          "stock": 3
-        },
-        {
-          "size": 41,
-          "stock": 3
-        },
-        {
-          "size": 42,
+          "size": "12",
           "stock": 12
+        },
+        {
+          "size": "13",
+          "stock": 12
+        },
+        {
+          "size": "14",
+          "stock": 14
         }
-      ],
-      "price": 170,
-      "description": "hiep",
-      "category": "Running",
-      "gender": "Men",
-      "image": "https://sneakerhs.com/wp-content/uploads/2023/08/giay-nike-air-force-1-low-07-lv8-panda-dx3115-100-rep-11-gia-re.jpg"
+      ]
     }
   ],
   "categories": [

@@ -15,9 +15,23 @@ function Profile() {
   const id = sessionStorage.getItem("id");
   // Trạng thái điều khiển hiển thị Modal
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [openChangepass, setOpenChangePass] = useState(false);
   // Trạng thái điều khiển chế độ chỉnh sửa
   const [isEditing, setIsEditing] = useState(false);
   const [form] = Form.useForm();
+
+  const patchPassword = async (newPassword) => {
+    const response = await fetch(`http://localhost:3002/users/${id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        password: newPassword
+      })
+    })
+    return await response.json();
+  }
 
   const handleLogin = () => {
     navigate('/login');
@@ -29,9 +43,39 @@ function Profile() {
     sessionStorage.removeItem("token");
     navigate('/');
     dispatch(logoutAccount());
+    message.success('Đăng xuất thành công!');
   }
   const handleHistory = () => {
     navigate('/history');
+  }
+
+  const handleChangePass = () => {
+    setOpenChangePass(true)
+  }
+
+  const handleOk = (e) => {
+    console.log(e);
+  }
+
+  const handleSubmitPass = async (e) => {
+    if(e.newPassword !== e.confirmPassword) {
+      message.error('Mật khẩu xác nhận không khớp!');
+    }
+    else if(user[0].password !== e.oldPassword) {
+      message.error('Mật khẩu không chính xác')
+    }
+    else {
+      const response = await patchPassword(e.newPassword);
+      console.log(response);
+      if(response) {
+        message.success('Đổi mật khẩu thành công!');
+        setOpenChangePass(false);
+        form.resetFields();
+      }
+      else {
+        message.error('Đổi mật khẩu thất bại!');
+      }
+    }
   }
 
   const getUser = async (token) => {
@@ -74,7 +118,7 @@ function Profile() {
     },
     {
       key: '4',
-      label: <Button>Đổi mật khẩu</Button>
+      label: <Button onClick={handleChangePass}>Đổi mật khẩu</Button>
     },
     {
       key: '5',
@@ -99,6 +143,7 @@ function Profile() {
   const handleCancel = () => {
     setIsModalVisible(false);
     setIsEditing(false);
+    setOpenChangePass(false);
   };
 
   // Chuyển chế độ sang chỉnh sửa
@@ -174,6 +219,51 @@ function Profile() {
                 </Button>
               )
             }
+          </Form.Item>
+        </Form>
+      </Modal>
+      <Modal
+        title="Đổi mật khẩu"
+        visible={openChangepass}
+        onOk={handleOk}
+        onCancel={handleCancel}
+        okText="Xác nhận"
+        cancelText="Hủy"
+        footer={false}
+      >
+        <Form
+          form={form}
+          layout="vertical"
+          name="change_password"
+          onFinish={handleSubmitPass}
+        >
+          <Form.Item
+            label="Mật khẩu cũ"
+            name="oldPassword"
+            rules={[{ required: true, message: "Vui lòng nhập mật khẩu cũ!" }]}
+          >
+            <Input.Password placeholder="Nhập mật khẩu cũ" />
+          </Form.Item>
+          <Form.Item
+            label="Mật khẩu mới"
+            name="newPassword"
+            rules={[
+              { required: true, message: "Vui lòng nhập mật khẩu mới!" },
+            ]}
+          >
+            <Input.Password placeholder="Nhập mật khẩu mới" />
+          </Form.Item>
+          <Form.Item
+            label="Xác nhận mật khẩu mới"
+            name="confirmPassword"
+            rules={[
+              { required: true, message: "Vui lòng nhập mật khẩu mới!" },
+            ]}
+          >
+            <Input.Password placeholder="Nhập lại mật khẩu mới" />
+          </Form.Item>
+          <Form.Item>
+            <Button type='primary' htmlType='submit'>Đổi mật khẩu</Button>
           </Form.Item>
         </Form>
       </Modal>

@@ -20,7 +20,7 @@ const ManageOrders = () => {
   const getOrders = async () => {
     const response = await fetch(`http://localhost:3002/history`);
     const data = await response.json();
-    setOrders(data);
+    setOrders(data.reverse());
     return data;
   };
 

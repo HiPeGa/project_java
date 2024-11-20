@@ -1,4 +1,4 @@
-import { Button, Carousel, Col, Form, Image, Modal, notification, Row, Select, Space, Tag } from "antd";
+import { Button, Carousel, Col, Form, Image, Input, Modal, notification, Row, Select, Space, Tag } from "antd";
 import { useEffect, useState } from "react";
 import './Home.scss';
 import { useSelector } from "react-redux";
@@ -27,6 +27,8 @@ function Home() {
   const [indexSize, setIndexSize] = useState(0);
   const [user, setUser] = useState({});
   const [carts, setCarts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState(products);
+
 
   const isLogin = useSelector(state => state.loginReducer);
   const token = sessionStorage.getItem('token');
@@ -134,6 +136,12 @@ function Home() {
   }
 
   useEffect(() => {
+    const fetchData = async () => {
+      const allProducts = await getProducts();
+      setProducts(allProducts); // Gán vào danh sách gốc
+      setFilteredProducts(allProducts); // Hiển thị toàn bộ ban đầu
+    };
+    fetchData();
     getBrands();
     getCategories();
     getProducts();
@@ -143,21 +151,23 @@ function Home() {
     }
   }, [isLogin]);
 
-  const optionBrands = brands.map(item => {
+  let optionBrands = brands.map(item => {
     return {
       value: item.name,
       label: item.name,
     }
   })
+  optionBrands = [{value: "Tất cả", name: "Tất cả"}, ...optionBrands];
 
-  const optionCategories = categories.map(item => {
+  let optionCategories = categories.map(item => {
     return {
       value: item.name,
       label: item.name,
     }
   })
+  optionCategories = [{value: "Tất cả", name: "Tất cả"}, ...optionCategories];
 
-  const optionsPrices = [
+  let optionsPrices = [
     {
       value: 1,
       label: "Dưới 1 triệu"
@@ -175,6 +185,7 @@ function Home() {
       label: "Trên 10 triệu"
     }
   ]
+  optionsPrices = [{value: "Tất cả", name: "Tất cả"}, ...optionsPrices];
 
   const handleChangeSize = (e) => {
     setIndexSize(e);
@@ -231,9 +242,34 @@ function Home() {
     }
   }
 
-  const handleSearch = (e) => {
-    console.log(e);
-  }
+  const handleFilter = (values) => {
+    const { brand, category, price } = values;
+  
+    let filtered = [...products];
+  
+    // Lọc theo thương hiệu
+    if (brand && brand !== "Tất cả") {
+      filtered = filtered.filter((item) => item.brand === brand);
+    }
+  
+    // Lọc theo loại giày
+    if (category && category !== "Tất cả") {
+      filtered = filtered.filter((item) => item.category === category);
+    }
+  
+    // Lọc theo giá tiền
+    if (price && price !== "Tất cả") {
+      filtered = filtered.filter((item) => {
+        if (price === 1) return item.price < 1000000; // Dưới 1 triệu
+        if (price === 2) return item.price >= 1000000 && item.price <= 5000000; // 1-5 triệu
+        if (price === 3) return item.price > 5000000 && item.price <= 10000000; // 5-10 triệu
+        if (price === 4) return item.price > 10000000; // Trên 10 triệu
+        return true;
+      });
+    }
+  
+    setProducts(filtered);
+  };
 
   const contentStyle = {
     marginTop: "50",
@@ -244,6 +280,22 @@ function Home() {
     textAlign: 'center',
     background: '#364d79',
   };
+
+  const handleSearch = async (e) => {
+    if(e.length === 0) {
+      const data = await getProducts();
+      setProducts(data);
+    }
+    else {
+      const data = await getProducts();
+
+      const newProducts = data.filter((item) => {
+        return item.name.toLowerCase().includes(e.name.toLowerCase());
+      });
+      console.log(newProducts)
+      setProducts(newProducts);
+    }
+  }
 
   return (
     <>
@@ -267,6 +319,14 @@ function Home() {
           <div className="home__wrap">
             <h2 className="home__title" style={{marginTop: "0px"}}>Sản phẩm</h2>
             <Form onFinish={handleSearch}>
+              <Form.Item name='name'>
+                <Input placeholder="Tên sản phẩm" />
+              </Form.Item>
+              <Form.Item>
+                <Button type="primary" htmlType="submit">Tìm kiếm</Button>
+              </Form.Item>
+            </Form>
+            <Form onFinish={handleFilter}>
               <Form.Item name='brand'>
                 <Select placeholder='Thương hiệu' options={optionBrands} />
               </Form.Item>
@@ -282,24 +342,20 @@ function Home() {
             </Form>
             <div className="product__list">
               <Row gutter={[20, 20]}>
-                {
-                  products.map((item) => {
-                    return (
-                      <Col xl={6} onClick={() => { showModal(item) }} key={item.id}>
-                        <div className="product__item">
-                          <div className="product__image">
-                            <img src={item.image} alt={item.name} />
-                          </div>
-                          <div className="product__info">
-                            <h3 className="product__name">{item.name}</h3>
-                            <p className="product__description">{item.description}</p>
-                            <p className="product__price">Giá: {item.price} VNĐ</p>
-                          </div>
-                        </div>
-                      </Col>
-                    )
-                  })
-                }
+                {products.map((item) => (
+                  <Col xl={6} onClick={() => showModal(item)} key={item.id}>
+                    <div className="product__item">
+                      <div className="product__image">
+                        <img src={item.image} alt={item.name} />
+                      </div>
+                      <div className="product__info">
+                        <h3 className="product__name">{item.name}</h3>
+                        <p className="product__description">{item.description}</p>
+                        <p className="product__price">Giá: {item.price} VNĐ</p>
+                      </div>
+                    </div>
+                  </Col>
+                ))}
               </Row>
             </div>
           </div>

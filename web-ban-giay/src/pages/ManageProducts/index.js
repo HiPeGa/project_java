@@ -1,6 +1,19 @@
-import { Button, Col, Form, Image, Input, message, Modal, Row, Select, Table, Tag, InputNumber } from "antd";
+import {
+  Button,
+  Col,
+  Form,
+  Image,
+  Input,
+  message,
+  Modal,
+  Row,
+  Select,
+  Table,
+  Tag,
+  InputNumber,
+} from "antd";
 import { useEffect, useState } from "react";
-import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
+import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 
 function ManageProducts() {
   const [products, setProducts] = useState([]);
@@ -9,6 +22,8 @@ function ManageProducts() {
   const [editingProduct, setEditingProduct] = useState(null); // Sản phẩm đang chỉnh sửa
   const [form] = Form.useForm();
   const [currentStock, setCurrentStock] = useState(0); // Thêm state để lưu stock khi chọn size
+  const [isAddModalVisible, setIsAddModalVisible] = useState(false); // Hiển thị modal thêm sản phẩm
+  const [addForm] = Form.useForm(); // Form cho modal thêm sản phẩm
 
   const getProducts = async () => {
     const response = await fetch(`http://localhost:3002/products`);
@@ -23,44 +38,59 @@ function ManageProducts() {
 
   const handleChangeSize = (value, productId) => {
     // Cập nhật lại chỉ số size của sản phẩm theo productId
-    setSelectedSizeIndices(prevState => ({
+    setSelectedSizeIndices((prevState) => ({
       ...prevState,
       [productId]: value, // Lưu giá trị index size theo productId
     }));
-  
+
     // Cập nhật stock khi chọn size
-    const selectedSize = products.find(product => product.id === productId)?.size[value];
+    const selectedSize = products.find((product) => product.id === productId)
+      ?.size[value];
     if (selectedSize) {
       setCurrentStock(selectedSize.stock); // Cập nhật stock tương ứng
     }
-  };  
+  };
   // Hàm xử lý khi nhấn chỉnh sửa
   const onEdit = (record) => {
     setEditingProduct(record);
+    setIsEditModalVisible(true);
+
+    // Lấy size và stock đầu tiên làm mặc định
+    const defaultSizeIndex = 0;
+    const defaultStock = record.size[defaultSizeIndex]?.stock || 0;
+
     form.setFieldsValue({
-      ...record, // Điền thông tin sản phẩm vào form
-      size: record.size[0]?.size, // Điền size đầu tiên vào select
+      name: record.name,
+      image: record.image,
+      description: record.description,
+      brand: record.brand,
+      category: record.category,
+      price: record.price,
+      selectedSize: defaultSizeIndex, // Size mặc định
+      stock: defaultStock, // Stock mặc định
     });
-    setCurrentStock(record.size[0]?.stock || 0); // Lấy stock của size đầu tiên khi mở modal
-    setIsEditModalVisible(true); // Hiển thị Modal
   };
 
   // Hàm xử lý khi lưu thông tin sản phẩm đã chỉnh sửa
   const handleSaveEdit = async () => {
     try {
       const values = form.getFieldsValue();
-      const updatedProduct = { 
-        ...editingProduct, 
+
+      // Cập nhật stock cho size được chọn
+      const updatedSizes = editingProduct.size.map((item, index) => ({
+        ...item,
+        stock: index === values.selectedSize ? values.stock : item.stock,
+      }));
+
+      const updatedProduct = {
+        ...editingProduct,
         name: values.name,
         image: values.image,
         description: values.description,
         brand: values.brand,
         category: values.category,
         price: values.price,
-        size: editingProduct.size.map((size, index) => ({
-          ...size,
-          stock: index === selectedSizeIndices[editingProduct.id] ? currentStock : size.stock, // Cập nhật stock cho size được chọn
-        }))
+        size: updatedSizes, // Cập nhật danh sách size
       };
 
       await fetch(`http://localhost:3002/products/${editingProduct.id}`, {
@@ -68,9 +98,14 @@ function ManageProducts() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updatedProduct),
       });
+
       message.success("Cập nhật sản phẩm thành công!");
-      setProducts(products.map((product) => (product.id === editingProduct.id ? updatedProduct : product)));
-      setIsEditModalVisible(false); // Đóng Modal
+      setProducts(
+        products.map((product) =>
+          product.id === editingProduct.id ? updatedProduct : product
+        )
+      );
+      setIsEditModalVisible(false);
     } catch (error) {
       message.error("Có lỗi xảy ra khi cập nhật sản phẩm!");
     }
@@ -85,9 +120,11 @@ function ManageProducts() {
       cancelText: "Hủy",
       onOk: async () => {
         try {
-          await fetch(`http://localhost:3002/products/${record.id}`, { method: "DELETE" });
+          await fetch(`http://localhost:3002/products/${record.id}`, {
+            method: "DELETE",
+          });
           message.success("Xóa sản phẩm thành công!");
-          setProducts(products.filter(product => product.id !== record.id));
+          setProducts(products.filter((product) => product.id !== record.id));
         } catch (error) {
           message.error("Có lỗi xảy ra khi xóa sản phẩm!");
         }
@@ -95,48 +132,74 @@ function ManageProducts() {
     });
   };
 
+  const handleAddProduct = async () => {
+    try {
+      const values = addForm.getFieldsValue();
+      const newProduct = {
+        ...values,
+        size: values.size.map((item, index) => ({
+          size: item.size,
+          stock: item.stock,
+        })),
+      };
+  
+      await fetch(`http://localhost:3002/products`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newProduct),
+      });
+  
+      message.success("Thêm sản phẩm mới thành công!");
+      setIsAddModalVisible(false);
+      addForm.resetFields();
+      getProducts(); // Load lại danh sách sản phẩm
+    } catch (error) {
+      message.error("Có lỗi xảy ra khi thêm sản phẩm!");
+    }
+  };
+
   const columns = [
     {
-      title: 'STT',
-      key: 'index',
+      title: "STT",
+      key: "index",
       render: (text, record, index) => index + 1,
       width: 60,
-      align: 'center',
+      align: "center",
     },
     {
-      title: 'Hình ảnh',
-      dataIndex: 'image',
-      key: 'productImage',
-      render: (text) => <Image src={text} width={80} />
+      title: "Hình ảnh",
+      dataIndex: "image",
+      key: "productImage",
+      render: (text) => <Image src={text} width={80} />,
     },
     {
-      title: 'Tên sản phẩm',
-      dataIndex: 'name',
-      key: 'productName'
+      title: "Tên sản phẩm",
+      dataIndex: "name",
+      key: "productName",
     },
     {
-      title: 'Mô tả',
-      dataIndex: 'description',
-      key: 'productDescription',
+      title: "Mô tả",
+      dataIndex: "description",
+      key: "productDescription",
       width: 200,
     },
     {
-      title: 'Thương hiệu',
-      dataIndex: 'brand',
-      key: 'productBrand'
+      title: "Thương hiệu",
+      dataIndex: "brand",
+      key: "productBrand",
     },
     {
-      title: 'Loại',
-      dataIndex: 'category',
-      key: 'productCategory'
+      title: "Loại",
+      dataIndex: "category",
+      key: "productCategory",
     },
     {
-      title: 'Size',
-      key: 'size',
+      title: "Size",
+      key: "size",
       render: (text, record) => {
         const optionsSize = record.size.map((item, index) => ({
           value: index,
-          label: item.size
+          label: item.size,
         }));
 
         const currentSizeIndex = selectedSizeIndices[record.id] || 0;
@@ -148,24 +211,24 @@ function ManageProducts() {
             options={optionsSize}
           />
         );
-      }
+      },
     },
     {
-      title: 'Số lượng',
-      key: 'stock',
+      title: "Số lượng",
+      key: "stock",
       render: (text, record) => {
         const currentSizeIndex = selectedSizeIndices[record.id] || 0;
         return <>{record.size[currentSizeIndex]?.stock}</>;
-      }
+      },
     },
     {
-      title: 'Giá',
-      dataIndex: 'price',
-      key: 'productPrice',
+      title: "Giá",
+      dataIndex: "price",
+      key: "productPrice",
     },
     {
-      title: 'Trạng thái',
-      key: 'status',
+      title: "Trạng thái",
+      key: "status",
       render: (_, record) => {
         const currentSizeIndex = selectedSizeIndices[record.id] || 0;
         return record.size[currentSizeIndex]?.stock ? (
@@ -173,51 +236,68 @@ function ManageProducts() {
         ) : (
           <Tag color="#f50">Hết hàng</Tag>
         );
-      }
+      },
     },
     {
-      title: 'Thao tác',
-      key: 'action',
+      title: "Thao tác",
+      key: "action",
       render: (_, record) => {
         return (
           <>
-            <EditOutlined onClick={() => onEdit(record)} style={{ color: "#1890ff", fontSize: "18px", marginRight: "10px", cursor: "pointer" }} />
-            <DeleteOutlined onClick={() => onDelete(record)} style={{ color: "#ff4d4f", fontSize: "18px", cursor: "pointer" }} />
+            <EditOutlined
+              onClick={() => onEdit(record)}
+              style={{
+                color: "#1890ff",
+                fontSize: "18px",
+                marginRight: "10px",
+                cursor: "pointer",
+              }}
+            />
+            <DeleteOutlined
+              onClick={() => onDelete(record)}
+              style={{ color: "#ff4d4f", fontSize: "18px", cursor: "pointer" }}
+            />
           </>
         );
-      }      
-    }
+      },
+    },
   ];
 
   const handleSearchProducts = async (e) => {
-
     const data = await getProducts();
 
-    const newProducts = data.filter(item => {
+    const newProducts = data.filter((item) => {
       return item.name.toLowerCase().includes(e.nameProducts.toLowerCase());
-    })
+    });
     setProducts(newProducts);
   };
 
   return (
     <>
-      <div className="custom-table-container" style={{ marginTop: "0px", background: "none", padding: "0px" }}>
+      <div
+        className="custom-table-container"
+        style={{ marginTop: "0px", background: "none", padding: "0px" }}
+      >
         <h1>Quản lý sản phẩm</h1>
         <Row gutter={[0, 20]} style={{ width: "100%" }}>
           <Col xl={24}>
-            <Button type="primary">Thêm sản phẩm</Button>
+          <Button type="primary" onClick={() => setIsAddModalVisible(true)}>
+            Thêm sản phẩm
+          </Button>
           </Col>
           <Col xl={24}>
             <Form onFinish={handleSearchProducts}>
               <Row gutter={[20, 20]}>
                 <Col xl={5}>
-                  <Form.Item name='nameProducts'>
+                  <Form.Item name="nameProducts">
                     <Input placeholder="Nhập tên sản phẩm" />
                   </Form.Item>
                 </Col>
                 <Col xl={12}>
                   <Form.Item>
-                    <Button htmlType="submit" type="primary">Tìm kiếm</Button>
+                    <Button htmlType="submit" type="primary">
+                      Tìm kiếm
+                    </Button>
                   </Form.Item>
                 </Col>
               </Row>
@@ -232,72 +312,201 @@ function ManageProducts() {
           pagination={{ pageSize: 5 }}
           style={{ minWidth: "100%" }}
         />
-
-        {/* Modal chỉnh sửa sản phẩm */}
         <Modal
-          title="Chỉnh sửa sản phẩm"
+          title={
+            <h2 style={{textAlign: 'center'}}>Chỉnh sửa sản phẩm</h2>
+          }
           visible={isEditModalVisible}
           onCancel={() => setIsEditModalVisible(false)}
           onOk={handleSaveEdit}
           okText="Lưu"
           cancelText="Hủy"
+          style={{ top: "70px", minWidth: "60%" }}
         >
           <Form form={form} layout="vertical">
-            <Form.Item 
-              name="name" 
-              label="Tên sản phẩm" 
+            <Form.Item
+              name="name"
+              label="Tên sản phẩm"
+              rules={[
+                { required: true, message: "Vui lòng nhập tên sản phẩm!" },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+            <Form.Item
+              name="image"
+              label="Hình ảnh (URL)"
+              rules={[
+                { required: true, message: "Vui lòng nhập URL hình ảnh!" },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+            <Form.Item
+              name="description"
+              label="Mô tả"
+              rules={[
+                { required: true, message: "Vui lòng nhập mô tả sản phẩm!" },
+              ]}
+            >
+              <Input.TextArea rows={3} />
+            </Form.Item>
+            <Form.Item
+              name="brand"
+              label="Thương hiệu"
+              rules={[
+                { required: true, message: "Vui lòng nhập thương hiệu!" },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+            <Form.Item
+              name="category"
+              label="Loại sản phẩm"
+              rules={[
+                { required: true, message: "Vui lòng nhập loại sản phẩm!" },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+            <Form.Item
+              name="price"
+              label="Giá sản phẩm"
+              rules={[
+                { required: true, message: "Vui lòng nhập giá sản phẩm!" },
+              ]}
+            >
+              <InputNumber style={{ width: "100%" }} min={0} />
+            </Form.Item>
+            <Form.Item
+              name="selectedSize"
+              label="Size"
+              rules={[{ required: true, message: "Vui lòng chọn size!" }]}
+            >
+              <Select
+                options={editingProduct?.size.map((item, index) => ({
+                  label: item.size,
+                  value: index,
+                }))}
+                onChange={(value) => {
+                  const selectedStock = editingProduct.size[value]?.stock || 0;
+                  form.setFieldsValue({ stock: selectedStock }); // Cập nhật số lượng tương ứng
+                }}
+              />
+            </Form.Item>
+            <Form.Item
+              name="stock"
+              label="Số lượng"
+              rules={[{ required: true, message: "Vui lòng nhập số lượng!" }]}
+            >
+              <InputNumber style={{ width: "100%" }} min={0} />
+            </Form.Item>
+          </Form>
+        </Modal>
+
+        <Modal
+          title={<h2 style={{ textAlign: "center" }}>Thêm sản phẩm mới</h2>}
+          visible={isAddModalVisible}
+          onCancel={() => setIsAddModalVisible(false)}
+          onOk={handleAddProduct}
+          okText="Lưu"
+          cancelText="Hủy"
+          style={{ top: "70px", minWidth: "60%" }}
+        >
+          <Form form={addForm} layout="vertical">
+            <Form.Item
+              name="name"
+              label="Tên sản phẩm"
               rules={[{ required: true, message: "Vui lòng nhập tên sản phẩm!" }]}
             >
               <Input />
             </Form.Item>
-            <Form.Item 
-              name="image" 
-              label="Link ảnh" 
-              rules={[{ required: true, message: "Vui lòng nhập link ảnh!" }]}
+            <Form.Item
+              name="image"
+              label="Hình ảnh (URL)"
+              rules={[{ required: true, message: "Vui lòng nhập URL hình ảnh!" }]}
             >
               <Input />
             </Form.Item>
-            <Form.Item name="description" label="Mô tả">
+            <Form.Item
+              name="description"
+              label="Mô tả"
+              rules={[{ required: true, message: "Vui lòng nhập mô tả sản phẩm!" }]}
+            >
               <Input.TextArea rows={3} />
             </Form.Item>
-            <Form.Item name="brand" label="Thương hiệu">
+            <Form.Item
+              name="brand"
+              label="Thương hiệu"
+              rules={[{ required: true, message: "Vui lòng nhập thương hiệu!" }]}
+            >
               <Input />
             </Form.Item>
-            <Form.Item name="category" label="Loại">
+            <Form.Item
+              name="category"
+              label="Loại sản phẩm"
+              rules={[{ required: true, message: "Vui lòng nhập loại sản phẩm!" }]}
+            >
               <Input />
             </Form.Item>
-
-            {/* Chọn size trong Modal */}
-            <Form.Item name="size" label="Size" rules={[{ required: true, message: "Vui lòng chọn size!" }]}>
-              <Select
-                value={editingProduct?.size[selectedSizeIndices[editingProduct.id]]?.size} // Lấy size hiện tại
-                options={editingProduct?.size?.map((item, index) => ({
-                  value: index,
-                  label: item.size,
-                }))} 
-                onChange={(value) => handleChangeSize(value, editingProduct.id)} // Cập nhật stock khi chọn size
-              />
-            </Form.Item>
-
-            {/* Số lượng stock tương ứng với size đã chọn */}
-            <Form.Item name="stock" label="Số lượng">
-              <InputNumber 
-                value={currentStock} 
-                onChange={setCurrentStock} 
-                min={0} 
-                max={10000} // Tùy chỉnh giới hạn stock nếu cần
-              />
-            </Form.Item>
-
-            <Form.Item 
-              name="price" 
-              label="Giá" 
+            <Form.Item
+              name="price"
+              label="Giá sản phẩm"
               rules={[{ required: true, message: "Vui lòng nhập giá sản phẩm!" }]}
             >
-              <Input type="number" />
+              <InputNumber style={{ width: "100%" }} min={0} />
             </Form.Item>
+            <Form.List name="size">
+              {(fields, { add, remove }) => (
+                <>
+                  {fields.map(({ key, name, fieldKey, ...restField }) => (
+                    <Row key={key} gutter={10} align="middle">
+                      <Col span={12}>
+                        <Form.Item
+                          {...restField}
+                          name={[name, "size"]}
+                          fieldKey={[fieldKey, "size"]}
+                          rules={[{ required: true, message: "Nhập size!" }]}
+                        >
+                          <Input placeholder="Size (e.g., S, M, L)" />
+                        </Form.Item>
+                      </Col>
+                      <Col span={8}>
+                        <Form.Item
+                          {...restField}
+                          name={[name, "stock"]}
+                          fieldKey={[fieldKey, "stock"]}
+                          rules={[{ required: true, message: "Nhập số lượng!" }]}
+                        >
+                          <InputNumber placeholder="Số lượng" min={0} />
+                        </Form.Item>
+                      </Col>
+                      <Col span={4}>
+                        <Button
+                          type="danger"
+                          onClick={() => remove(name)}
+                          style={{ width: "100%" }}
+                        >
+                          Xóa
+                        </Button>
+                      </Col>
+                    </Row>
+                  ))}
+                  <Form.Item>
+                    <Button
+                      type="dashed"
+                      onClick={() => add()}
+                      style={{ width: "100%" }}
+                    >
+                      + Thêm size
+                    </Button>
+                  </Form.Item>
+                </>
+              )}
+            </Form.List>
           </Form>
         </Modal>
+
       </div>
     </>
   );
