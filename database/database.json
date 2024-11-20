@@ -1389,6 +1389,19 @@
       "productPrice": 85,
       "productQuantity": 1,
       "productSize": 40
+    },
+    {
+      "id": "cc80",
+      "userId": "6",
+      "productId": "7",
+      "productImage": "https://sneakerhs.com/wp-content/uploads/2023/08/giay-nike-air-force-1-low-07-lv8-panda-dx3115-100-rep-11-gia-re.jpg",
+      "productName": "New Balance 574",
+      "productDescription": "New Balance 574 mang đến sự thoải mái và phong cách đơn giản.",
+      "productBrand": "New Balance",
+      "productCategory": "Sneakers",
+      "productPrice": 100,
+      "productQuantity": 2,
+      "productSize": 39
     }
   ],
   "history": [
@@ -4535,7 +4548,7 @@
       "phone": "123456",
       "email": "hiep2804@gmail.com",
       "address": "PTIT",
-      "status": "Chờ xử lý",
+      "status": "Đã nhận đơn",
       "time": "Thu Tuesday, ngay 19 thang 11 nam 2024, 02:19"
     },
     {

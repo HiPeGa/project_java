@@ -218,9 +218,7 @@ function Home() {
         const reponsePatchCart = await patchProductInCart(productInCart);
         if(reponsePatchCart){
           openNotification('Thành công', 'Đã thêm vào giỏ hàng', 'success');
-          setTimeout(() => {
-            navigate('/carts');
-          }, 1000);
+          setIsModalOpen(false);
         }
         else{
           openNotification('Thất bại', 'Thêm sản phẩm thất bại', 'error')
@@ -230,9 +228,7 @@ function Home() {
         const responsePostCart = await postCarts(productIsChoose);
         if(responsePostCart){
           openNotification('Thành công', 'Đã thêm vào giỏ hàng', 'success')
-          setTimeout(() => {
-            navigate('/carts');
-          }, 1000);
+          setIsModalOpen(false);
         }
         else{
           openNotification('Thất bại', 'Thêm sản phẩm thất bại', 'error')
