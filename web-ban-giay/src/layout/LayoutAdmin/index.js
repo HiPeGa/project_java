@@ -1,11 +1,19 @@
 import React from 'react';
 import { Layout, Menu } from 'antd';
 import { BarChartOutlined, ContactsOutlined, LineChartOutlined, LogoutOutlined, ProductOutlined, ShopOutlined, ShoppingCartOutlined, UserOutlined } from '@ant-design/icons';
-import { NavLink, Outlet } from 'react-router-dom';
+import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import './LayoutAdmin.scss';
 
 const { Header, Footer, Sider, Content } = Layout;
 function LayoutAdmin() {
+
+  const navigate = useNavigate();
+
+  const handleLogOut = () => {
+    sessionStorage.clear();
+    navigate('/admin')
+  }
+
   return (
     <Layout className='layout-admin'>
       <Header className='header' style={{padding: "0px 20px"}}>
@@ -45,7 +53,7 @@ function LayoutAdmin() {
               }
             ]}
           />
-          <div className='sider__logout' style={{color: "white", fontSize: "18px"}}><LogoutOutlined /> Đăng xuất</div>
+          <div onClick={handleLogOut} className='sider__logout' style={{color: "white", fontSize: "18px"}}><LogoutOutlined /> Đăng xuất</div>
         </Sider>
         <Content className='content' style={{minHeight: "91vh", height: "auto", overflowY: "auto"}}>
           <Outlet />

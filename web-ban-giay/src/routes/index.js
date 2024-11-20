@@ -12,6 +12,9 @@ import ManageShop from "../pages/ManageShop";
 import ManageUsers from "../pages/ManageUsers";
 import Register from "../pages/Register";
 import ManageOrders from "../pages/ManageOrders";
+import PrivateCustomer from "../pages/PrivateCustomer";
+import LoginAdmin from "../pages/LoginAdmin";
+import PrivateAdmin from "../pages/PrivateAdmin";
 
 const routes = [
   {
@@ -21,10 +24,6 @@ const routes = [
       {
         path: '/',
         element: <Home />
-      },
-      {
-        path: '/carts',
-        element: <Carts />
       },
       {
         path: '/login',
@@ -39,12 +38,21 @@ const routes = [
         element: <Introduce />
       },
       {
-        path: '/history',
-        element: <History />
-      },
-      {
         path: '/contact',
         element: <Contact />
+      },
+      {
+        element: <PrivateCustomer />,
+        children: [
+          {
+            path: '/carts',
+            element: <Carts />
+          },
+          {
+            path: '/history',
+            element: <History />
+          }
+        ]
       }
     ],
   },
@@ -53,24 +61,33 @@ const routes = [
     element: <LayoutAdmin />,
     children: [
       {
-        path: 'manage-shop',
-        element: <ManageShop />
+        path: '',
+        element: <LoginAdmin />
       },
       {
-        path: 'manage-products',
-        element: <ManageProducts />
-      },
-      {
-        path: 'manage-users',
-        element: <ManageUsers />
-      },
-      {
-        path: 'manage-contacts',
-        element: <ManageContacts />
-      },
-      {
-        path: 'manage-orders',
-        element: <ManageOrders />
+        element: <PrivateAdmin />,
+        children: [
+          {
+            path: 'manage-shop',
+            element: <ManageShop />
+          },
+          {
+            path: 'manage-products',
+            element: <ManageProducts />
+          },
+          {
+            path: 'manage-users',
+            element: <ManageUsers />
+          },
+          {
+            path: 'manage-contacts',
+            element: <ManageContacts />
+          },
+          {
+            path: 'manage-orders',
+            element: <ManageOrders />
+          }
+        ]
       }
     ]
   }
