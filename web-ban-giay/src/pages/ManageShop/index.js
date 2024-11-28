@@ -109,7 +109,7 @@ function ManageShop() {
 
   return (
     <div className="manage-shop">
-      <h1 style={{ textAlign: 'center' }}>Quản lý cửa hàng</h1>
+      <h1 className="animate__animated animate__fadeInDown" style={{ textAlign: 'center' }}>Quản lý cửa hàng</h1>
       <Row gutter={[20, 20]} style={{ marginBottom: "50px" }}>
         <Col span={6}>
           <Card bordered={false} className="stat-card">

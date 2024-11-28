@@ -194,7 +194,7 @@ const ManageOrders = () => {
 
   return (
     <div>
-      <h1 style={{ textAlign: "center" }}>Quản lý đơn hàng</h1>
+      <h1 className="animate__animated animate__fadeInDown" style={{ textAlign: "center" }}>Quản lý đơn hàng</h1>
       <Form
         onFinish={handleFilterStatus}
         initialValues={{ status: "Tất cả" }} // Đặt giá trị mặc định cho trường status

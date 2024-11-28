@@ -17,7 +17,7 @@ function LayoutAdmin() {
   return (
     <Layout className='layout-admin'>
       <Header className='header' style={{padding: "0px 20px"}}>
-        <div className='header__dashboard'>DashBoard</div>
+        <div className='header__dashboard animate__animated animate__lightSpeedInRight'>DashBoard</div>
       </Header>
       <Layout>
         <Sider className='sider'>

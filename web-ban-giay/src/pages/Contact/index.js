@@ -65,9 +65,9 @@ const Contact = () => {
     <>
       {contextHolder}
       <div className="contact-container">
-        <h2 className="contact-title">Liên hệ với chúng tôi</h2>
+        <h2 className="contact-title animate__animated animate__heartBeat">Liên hệ với chúng tôi</h2>
         <Row gutter={40}>
-          <Col xs={24} md={12}>
+          <Col xs={24} md={12} className='animate__animated animate__fadeInLeftBig animate__fast'>
             <Form
               form={form}
               layout="vertical"
@@ -79,7 +79,7 @@ const Contact = () => {
                 name="name"
                 rules={[{ required: true, message: 'Vui lòng nhập tên của bạn!' }]}
               >
-                <Input placeholder="Tên của bạn" prefix={<UserOutlined />} />
+                <Input className = "area-hover" placeholder="Tên của bạn" prefix={<UserOutlined />} />
               </Form.Item>
 
               <Form.Item
@@ -90,7 +90,7 @@ const Contact = () => {
                   { type: 'email', message: 'Định dạng email không hợp lệ!' },
                 ]}
               >
-                <Input placeholder="Email của bạn" prefix={<MailOutlined />} />
+                <Input className = "area-hover" placeholder="Email của bạn" prefix={<MailOutlined />} />
               </Form.Item>
 
               <Form.Item
@@ -98,7 +98,7 @@ const Contact = () => {
                 name="phone"
                 rules={[{ required: true, message: 'Vui lòng nhập số điện thoại của bạn!' }]}
               >
-                <Input placeholder="Số điện thoại của bạn" prefix={<PhoneOutlined />} />
+                <Input className = "area-hover" placeholder="Số điện thoại của bạn" prefix={<PhoneOutlined />} />
               </Form.Item>
 
               <Form.Item
@@ -106,7 +106,7 @@ const Contact = () => {
                 name="message"
                 rules={[{ required: true, message: 'Vui lòng nhập tin nhắn của bạn!' }]}
               >
-                <Input.TextArea placeholder="Viết tin nhắn của bạn ở đây" rows={4} />
+                <Input.TextArea className = "area-hover" placeholder="Viết tin nhắn của bạn ở đây" rows={4} />
               </Form.Item>
 
               <Form.Item>
@@ -117,7 +117,7 @@ const Contact = () => {
             </Form>
           </Col>
 
-          <Col xs={24} md={12}>
+          <Col xs={24} md={12} className='animate__animated animate__fadeInRightBig animate__faster'>
             <div className="contact-info" style={{paddingTop: "0px"}}>
               <h3 style={{marginTop: "0px"}}>Thông tin liên hệ</h3>
               <p><EnvironmentOutlined /> Địa chỉ: Km10, đường Nguyễn Trãi, Phường Mộ Lao, Quận Hà Đông, Thành phố Hà Nội</p>

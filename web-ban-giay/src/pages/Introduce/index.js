@@ -5,13 +5,13 @@ const { Title, Paragraph } = Typography;
 
 function Introduce() {
   return (
-    <div style={{ padding: "40px", maxWidth: "1200px", margin: "auto", marginTop: "30px" }}>
-      <Title level={1} style={{ textAlign: "center", marginBottom: "40px" }}>
+    <div className="introduce-container">
+      <Title level={1} className="introduce-title animate__animated animate__fadeInDown">
         Giới thiệu về Shop Giày của chúng tôi
       </Title>
 
-      <Row gutter={[24, 24]}>
-        <Col xs={24} md={12}>
+      <Row gutter={[24, 24]} className="introduce-row">
+        <Col xs={24} md={12} className='animate__animated animate__bounceInLeft'>
           <Image
             src="https://wsu.vn/wp-content/uploads/2023/06/mauwesitebanhang-3.png" // Đổi URL thành ảnh đại diện cho cửa hàng
             alt="Giới thiệu về cửa hàng"
@@ -20,14 +20,14 @@ function Introduce() {
         </Col>
 
         <Col xs={24} md={12}>
-          <Paragraph style={{ fontSize: "16px", lineHeight: "1.8" }}>
+          <Paragraph className="introduce-paragraph">
             Chào mừng bạn đến với cửa hàng giày của chúng tôi! Chúng tôi tự hào
             mang đến cho bạn những đôi giày chất lượng, phong cách và đa dạng,
             phù hợp cho mọi lứa tuổi và sở thích. Với sự tận tâm và lòng yêu
             nghề, chúng tôi cam kết cung cấp cho khách hàng những sản phẩm tốt
             nhất và dịch vụ chăm sóc khách hàng tận tình.
           </Paragraph>
-          <Paragraph style={{ fontSize: "16px", lineHeight: "1.8" }}>
+          <Paragraph className="introduce-paragraph">
             Tại cửa hàng của chúng tôi, bạn có thể tìm thấy các mẫu giày mới
             nhất, từ giày thể thao, giày dạo phố đến giày công sở. Mỗi sản phẩm
             đều được chọn lọc kỹ càng nhằm mang lại trải nghiệm thoải mái và phong
@@ -37,18 +37,18 @@ function Introduce() {
         </Col>
       </Row>
 
-      <Title level={2} style={{ marginTop: "40px", textAlign: "center" }}>
+      <Title level={2} className="introduce-subtitle">
         Tại sao chọn chúng tôi?
       </Title>
 
-      <Row gutter={[24, 24]} style={{ marginTop: "20px" }}>
+      <Row gutter={[24, 24]}  className="introduce-features" >
         <Col xs={24} md={8}>
           <Card
             hoverable
             title="Chất lượng hàng đầu"
-            style={{ borderRadius: "8px", textAlign: "center", height: "100%" }}
+            className="introduce-card"
           >
-            <Paragraph>Giày của chúng tôi được sản xuất từ những chất liệu bền bỉ, đảm bảo chất lượng cao nhất cho từng sản phẩm.</Paragraph>
+            <Paragraph className="p">Giày của chúng tôi được sản xuất từ những chất liệu bền bỉ, đảm bảo chất lượng cao nhất cho từng sản phẩm.</Paragraph>
           </Card>
         </Col>
 
@@ -56,9 +56,9 @@ function Introduce() {
           <Card
             hoverable
             title="Đa dạng mẫu mã"
-            style={{ borderRadius: "8px", textAlign: "center", height: "100%" }}
+            className="introduce-card"
           >
-            <Paragraph>Chúng tôi cung cấp nhiều mẫu mã giày đa dạng, từ cổ điển đến hiện đại, phục vụ mọi phong cách.</Paragraph>
+            <Paragraph className="p">Chúng tôi cung cấp nhiều mẫu mã giày đa dạng, từ cổ điển đến hiện đại, phục vụ mọi phong cách.</Paragraph>
           </Card>
         </Col>
 
@@ -66,9 +66,9 @@ function Introduce() {
           <Card
             hoverable
             title="Dịch vụ khách hàng tận tâm"
-            style={{ borderRadius: "8px", textAlign: "center", height: "100%" }}
+            className="introduce-card"
           >
-            <Paragraph>Đội ngũ chăm sóc khách hàng của chúng tôi luôn sẵn sàng hỗ trợ bạn, đảm bảo trải nghiệm mua sắm tốt nhất.</Paragraph>
+            <Paragraph className="p">Đội ngũ chăm sóc khách hàng của chúng tôi luôn sẵn sàng hỗ trợ bạn, đảm bảo trải nghiệm mua sắm tốt nhất.</Paragraph>
           </Card>
         </Col>
       </Row>

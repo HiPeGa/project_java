@@ -486,7 +486,7 @@ const ProductTable = () => {
     <>
       {contextHolder}
       <div className="custom-table-container">
-        <h1 style={{ marginTop: "0px" }}>Giỏ hàng</h1>
+        <h1 className="title animate__animated animate__bounce">Giỏ hàng</h1>
         <Table
           columns={columns}
           dataSource={productsInCart}

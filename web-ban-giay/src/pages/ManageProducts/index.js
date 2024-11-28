@@ -314,10 +314,10 @@ function ManageProducts() {
         className="custom-table-container"
         style={{ marginTop: "0px", background: "none", padding: "0px" }}
       >
-        <h1>Quản lý sản phẩm</h1>
+        <h1 className="animate__animated animate__fadeInDown">Quản lý sản phẩm</h1>
         <Row gutter={[0, 20]} style={{ width: "100%" }}>
           <Col xl={24}>
-          <Button type="primary" onClick={() => setIsAddModalVisible(true)}>
+          <Button className="add-find-product" type="primary" onClick={() => setIsAddModalVisible(true)}>
             Thêm sản phẩm
           </Button>
           </Col>
@@ -326,12 +326,12 @@ function ManageProducts() {
               <Row gutter={[20, 20]}>
                 <Col xl={5}>
                   <Form.Item name="nameProducts">
-                    <Input placeholder="Nhập tên sản phẩm" />
+                    <Input className = "area-focus" placeholder="Nhập tên sản phẩm" />
                   </Form.Item>
                 </Col>
                 <Col xl={12}>
                   <Form.Item>
-                    <Button htmlType="submit" type="primary">
+                    <Button className="add-find-product" htmlType="submit" type="primary">
                       Tìm kiếm
                     </Button>
                   </Form.Item>

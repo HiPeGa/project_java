@@ -316,10 +316,10 @@ function Home() {
         </Carousel>
         <div className="container">
           <div className="home__wrap">
-            <h2 className="home__title" style={{marginTop: "0px"}}>Sản phẩm</h2>
+            <h2 className="home__title animate__animated animate__fadeInDown" style={{marginTop: "0px"}}>Sản phẩm</h2>
             <Form onFinish={handleSearch}>
               <Form.Item name='name'>
-                <Input placeholder="Tên sản phẩm" />
+                <Input className="area-focus" placeholder="Tên sản phẩm" />
               </Form.Item>
               <Form.Item>
                 <Button type="primary" htmlType="submit">Tìm kiếm</Button>

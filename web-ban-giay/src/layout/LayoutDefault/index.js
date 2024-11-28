@@ -24,15 +24,15 @@ function LayoutDefault() {
   return (
     <Layout>
       <Header className='header'>
-        <div className='header__logo'>
+        <div className='header__logo animate__animated animate__lightSpeedInRight'>
           <NavLink to='/'>Logo</NavLink>
         </div>
-        <div className='header__menu'>
+        <div className='header__menu animate__animated animate__fadeInDown'>
           <NavLink to='/'>Trang chủ</NavLink>
           <NavLink to='/introduce'>Giới thiệu</NavLink>
           <NavLink to='/contact'>Liên hệ</NavLink>
         </div>
-        <div className='header__action'>
+        <div className='header__action animate__animated animate__fadeInRight'>
           <div className='header__cart'>
           <Button onClick={handleToPageCarts}><ShoppingCartOutlined /></Button>
           </div>

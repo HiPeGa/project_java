@@ -109,7 +109,7 @@ function ManageContacts() {
 
   return (
     <div className="manage-contacts" style={{ width: '90%', margin: '0 auto' }}>
-      <h1 style={{ textAlign: 'center' }}>Quản lý liên hệ</h1>
+      <h1 className="animate__animated animate__fadeInDown" style={{ textAlign: 'center' }}>Quản lý liên hệ</h1>
       <Table dataSource={contacts} columns={columns} rowKey="id" />
 
       {/* Modal hiển thị chi tiết liên hệ */}

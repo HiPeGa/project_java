@@ -117,7 +117,7 @@ function ManageUsers() {
 
   return (
     <div className="manage-users" style={{width: "90%"}}>
-      <h1 style={{textAlign: "center"}}>Quản lý người dùng</h1>
+      <h1 className="animate__animated animate__fadeInDown" style={{textAlign: "center"}}>Quản lý người dùng</h1>
       <Table dataSource={users} columns={columns} rowKey="id" />
     </div>
   );

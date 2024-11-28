@@ -78,19 +78,19 @@ function Register() {
     <>
       {contextHolder}
       <div className="register">
-        <h2>Register Account</h2>
+        <h2 class="animate__animated animate__bounce">Register Account</h2>
         <Form onFinish={handleSubmit}>
           <Form.Item name='fullName' rules={[{ required: true, message: 'Please input your username!' }]}>
-            <Input placeholder="Full Name" />
+            <Input className= "button-focus" placeholder="Full Name" />
           </Form.Item>
           <Form.Item name='email' rules={[{ required: true, message: 'Please input your email!' }]}>
-            <Input placeholder="Email" type="email" />
+            <Input className= "button-focus" placeholder="Email" type="email" />
           </Form.Item>
           <Form.Item name='password' rules={[{ required: true, message: 'Please input your password!' }]}>
-            <Input.Password placeholder="Password" />
+            <Input.Password className= "button-focus" placeholder="Password" />
           </Form.Item>
           <Form.Item>
-            <Button htmlType="submit" type="primary" style={{color: "white"}}>Register</Button>
+            <Button htmlType="submit" type="primary" className = "register-button">Register</Button>
           </Form.Item>
         </Form>
       </div>

@@ -54,17 +54,17 @@ function Login() {
     <>
       {contextHolder}
       <div className="login">
-        <h1>Login</h1>
+        <h1 className = "animate__animated animate__bounce">Login</h1>
         <p>Bạn chưa có tài khoản? <NavLink to='/register'>Đăng ký</NavLink></p>
         <Form onFinish={handleSubmit}>
           <Form.Item name='email' rules={[{ required: true, message: 'Please input your username!' }]}>
-            <Input placeholder="Email" />
+            <Input className = "button-focus" placeholder="Email" />
           </Form.Item>
           <Form.Item name='password' rules={[{ required: true, message: 'Please input your password!' }]} >
-            <Input.Password placeholder="Password" />
+            <Input.Password className = "button-focus" placeholder="Password" />
           </Form.Item>
           <Form.Item>
-            <Button htmlType="submit" style={{color: "white"}} type="primary">Login</Button>
+            <Button htmlType="submit" className="login-button" type="primary">Login</Button>
           </Form.Item>
         </Form>
       </div>
