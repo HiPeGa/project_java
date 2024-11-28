@@ -177,6 +177,7 @@ const ManageOrders = () => {
   ];
 
   const handleChangeFilterStatus = (e) => {
+    console.log(e);
     setFilterStatus(e);
   };
 
@@ -231,7 +232,7 @@ const ManageOrders = () => {
       <Table
         dataSource={orders}
         columns={columns}
-        rowKey={(record) => record.id}
+        rowKey={(record, index) => `${record.id}-${index}`}
         bordered
         style={{ minWidth: "90%" }}
       />

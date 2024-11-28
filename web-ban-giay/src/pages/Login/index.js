@@ -58,10 +58,10 @@ function Login() {
         <p>Bạn chưa có tài khoản? <NavLink to='/register'>Đăng ký</NavLink></p>
         <Form onFinish={handleSubmit}>
           <Form.Item name='email' rules={[{ required: true, message: 'Please input your username!' }]}>
-            <Input className = "button-focus" placeholder="Email" />
+            <Input placeholder="Email" />
           </Form.Item>
           <Form.Item name='password' rules={[{ required: true, message: 'Please input your password!' }]} >
-            <Input.Password className = "button-focus" placeholder="Password" />
+            <Input.Password placeholder="Password" />
           </Form.Item>
           <Form.Item>
             <Button htmlType="submit" className="login-button" type="primary">Login</Button>

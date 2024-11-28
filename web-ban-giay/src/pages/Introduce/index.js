@@ -1,21 +1,21 @@
 import React from "react";
 import { Typography, Row, Col, Image, Card } from "antd";
-
+import './Introduce.scss';
 const { Title, Paragraph } = Typography;
 
 function Introduce() {
   return (
-    <div className="introduce-container">
-      <Title level={1} className="introduce-title animate__animated animate__fadeInDown">
+    <div className="introduce-container ">
+      <Title level={1} className="introduce-title animate__animated animate__fadeInDown" >
         Giới thiệu về Shop Giày của chúng tôi
       </Title>
 
       <Row gutter={[24, 24]} className="introduce-row">
-        <Col xs={24} md={12} className='animate__animated animate__bounceInLeft'>
+        <Col xs={24} md={12}  className='animate__animated animate__bounceInLeft'>
           <Image
             src="https://wsu.vn/wp-content/uploads/2023/06/mauwesitebanhang-3.png" // Đổi URL thành ảnh đại diện cho cửa hàng
-            alt="Giới thiệu về cửa hàng"
-            style={{ borderRadius: "8px" }}
+            alt="Giới thiệu về cửa hàng" className="introduce-image"
+            
           />
         </Col>
 
@@ -41,7 +41,7 @@ function Introduce() {
         Tại sao chọn chúng tôi?
       </Title>
 
-      <Row gutter={[24, 24]}  className="introduce-features" >
+      <Row gutter={[24, 24]} className="introduce-features" >
         <Col xs={24} md={8}>
           <Card
             hoverable

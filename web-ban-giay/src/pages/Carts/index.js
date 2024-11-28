@@ -772,6 +772,16 @@ const ProductTable = () => {
                             <strong>Size: </strong>
                             {product.productSize}
                           </p>
+                          <p
+                            style={{
+                              margin: "4px 0",
+                              color: "#666",
+                              fontSize: "12px",
+                            }}
+                          >
+                            <strong>Số lượng: </strong>
+                            {product.productQuantity}
+                          </p>
                           <p style={{ margin: 0, color: "red" }}>
                             <strong>Giá: </strong>
                             {product.productPrice.toLocaleString()} đ

@@ -184,6 +184,7 @@ function ManageProducts() {
           }
         ),
       });
+      console.log(response);
   
       message.success("Thêm sản phẩm mới thành công!");
       setIsAddModalVisible(false);
@@ -218,6 +219,11 @@ function ManageProducts() {
       dataIndex: "description",
       key: "productDescription",
       width: 200,
+      render: (text) => (
+        <div className="description-cell" title={text}>
+          {text}
+        </div>
+      ),
     },
     {
       title: "Thương hiệu",

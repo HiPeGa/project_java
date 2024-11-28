@@ -370,7 +370,7 @@ function Home() {
               <p className="product__detail-brand"><strong>Thương hiệu:</strong> {productDetail?.brand}</p>
               <p className="product__detail-category"><strong>Loại giày:</strong> {productDetail?.category}</p>
               <Space direction="horizontal">
-                <label htmlFor='chooseSize'><strong>Chọn size: </strong></label>
+                <label htmlFor='chooseSize'><strong style={{color: "#fff", fontSize: "16px"}}>Chọn size: </strong></label>
                 <Select id="chooseSize" onChange={(e) => {handleChangeSize(e)}} value={productDetail?.size[indexSize].size} className="product__detail-size">
                   {
                     productDetail?.size.map((item, index) => {
