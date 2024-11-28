@@ -32,6 +32,7 @@ function Home() {
 
   const isLogin = useSelector(state => state.loginReducer);
   const token = sessionStorage.getItem('token');
+  const id = sessionStorage.getItem('id');
 
   const navigate = useNavigate();
 
@@ -51,48 +52,48 @@ function Home() {
   };
 
   const getBrands = async () => {
-    const response = await fetch('http://localhost:3002/brands');
-    const tmp = await response.json();
-    setBrands(tmp);
-    return tmp;
+    const response = await fetch('/brand/get/all');
+    const data = await response.json();
+    setBrands(data.data);
+    return data.data;
   }
 
   const getCategories = async () => {
-    const response = await fetch('http://localhost:3002/categories');
-    const tmp = await response.json();
-    setCategories(tmp);
-    return tmp;
+    const response = await fetch('/category/get/all');
+    const data = await response.json();
+    setCategories(data.data);
+    return data.data;
   }
 
   const getProducts = async () => {
-    const response = await fetch('http://localhost:3002/products');
-    const tmp = await response.json();
-    setProducts(tmp);
-    return tmp;
+    const response = await fetch('/product/user/all');
+    const data = await response.json();
+    setProducts(data.data);
+    return data.data;
   }
 
   const getUser = async () => {
-    const response = await fetch(`http://localhost:3002/users?token=${token}`);
-    const tmp = await response.json();
-    setUser(tmp[0]);
-    return tmp;
+    const response = await fetch(`/users/user/me?id=${id}`);
+    const data = await response.json();
+    setUser(data.data);
+    return data.data;
   }
 
-  const getCarts = async () => {
-    const response = await fetch(`http://localhost:3002/carts`);
-    const tmp = await response.json();
-    setCarts(tmp);
-    return tmp;
-  }
+  // const getCarts = async () => {
+  //   const response = await fetch(`http://localhost:3002/carts`);
+  //   const tmp = await response.json();
+  //   setCarts(tmp);
+  //   return tmp;
+  // }
 
-  const getProductInCarts = async (userId, productId, productSize) => {
-    const response = await fetch(`http://localhost:3002/carts?userId=${userId}&productId=${productId}&productSize=${productSize}`)
-    const tmp = await response.json();
-    return tmp[0];
-  }
+  // const getProductInCarts = async (userId, productId, productSize) => {
+  //   const response = await fetch(`http://localhost:3002/carts?userId=${userId}&productId=${productId}&productSize=${productSize}`)
+  //   const tmp = await response.json();
+  //   return tmp[0];
+  // }
 
   const postCarts = async (productIsChoose) => {
-    const response = await fetch(`http://localhost:3002/carts`, {
+    const response = await fetch(`/cart/insert`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -100,40 +101,33 @@ function Home() {
       body: JSON.stringify({
         userId: user.id,
         productId: productIsChoose.id,
-        productImage: productIsChoose.image,
-        productName: productIsChoose.name,
-        productDescription: productIsChoose.description,
-        productBrand: productIsChoose.brand,
-        productCategory: productIsChoose.category,
-        productPrice: productIsChoose.price,
-        productQuantity: 1,
-        productSize: productIsChoose.size,
+        size: productIsChoose.size,
       })
     })
     return await response.json();
   }
 
-  const patchProductInCart = async (productInCart) => {
-    const response = await fetch(`http://localhost:3002/carts/${productInCart.id}`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(productInCart)
-    })
-    return await response.json();
-  }
+  // const patchProductInCart = async (productInCart) => {
+  //   const response = await fetch(`http://localhost:3002/carts/${productInCart.id}`, {
+  //     method: 'PATCH',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify(productInCart)
+  //   })
+  //   return await response.json();
+  // }
 
-  const patchProducts = async (newProduct) => {
-    const response = await fetch(`http://localhost:3002/products/${newProduct.id}`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(newProduct)
-    })
-    return await response.json();
-  }
+  // const patchProducts = async (newProduct) => {
+  //   const response = await fetch(`http://localhost:3002/products/${newProduct.id}`, {
+  //     method: 'PATCH',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify(newProduct)
+  //   })
+  //   return await response.json();
+  // }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -145,7 +139,6 @@ function Home() {
     getBrands();
     getCategories();
     getProducts();
-    getCarts();
     if(isLogin || token){
       getUser();
     }
@@ -204,28 +197,38 @@ function Home() {
       navigate('/login');
     }
     else{
-      let check = false; // Check xem đã tồn tại sản phẩm trong Carts hay chưa
-      carts.forEach(item => {
-        if(item.userId === user.id && item.productId === productIsChoose.id && item.productSize === productIsChoose.size){
-          check = true;
-        }
-      })
+      // let check = false; // Check xem đã tồn tại sản phẩm trong Carts hay chưa
+      // carts.forEach(item => {
+      //   if(item.userId === user.id && item.productId === productIsChoose.id && item.productSize === productIsChoose.size){
+      //     check = true;
+      //   }
+      // })
 
-      if(check){
-        const productInCart = await getProductInCarts(user.id, productIsChoose.id, productIsChoose.size);
-        productInCart.productQuantity += 1;
-        console.log(productInCart);
-        const reponsePatchCart = await patchProductInCart(productInCart);
-        if(reponsePatchCart){
-          openNotification('Thành công', 'Đã thêm vào giỏ hàng', 'success');
-          setIsModalOpen(false);
-        }
-        else{
-          openNotification('Thất bại', 'Thêm sản phẩm thất bại', 'error')
-        }
-      }
-      else{
-        const responsePostCart = await postCarts(productIsChoose);
+      // if(check){
+      //   const productInCart = await getProductInCarts(user.id, productIsChoose.id, productIsChoose.size);
+      //   productInCart.productQuantity += 1;
+      //   console.log(productInCart);
+      //   const reponsePatchCart = await patchProductInCart(productInCart);
+      //   if(reponsePatchCart){
+      //     openNotification('Thành công', 'Đã thêm vào giỏ hàng', 'success');
+      //     setIsModalOpen(false);
+      //   }
+      //   else{
+      //     openNotification('Thất bại', 'Thêm sản phẩm thất bại', 'error')
+      //   }
+      // }
+      // else{
+      //   const responsePostCart = await postCarts(productIsChoose);
+      //   if(responsePostCart){
+      //     openNotification('Thành công', 'Đã thêm vào giỏ hàng', 'success')
+      //     setIsModalOpen(false);
+      //   }
+      //   else{
+      //     openNotification('Thất bại', 'Thêm sản phẩm thất bại', 'error')
+      //   }
+      // }
+      // await patchProducts(newProduct[0]);
+      const responsePostCart = await postCarts(productIsChoose);
         if(responsePostCart){
           openNotification('Thành công', 'Đã thêm vào giỏ hàng', 'success')
           setIsModalOpen(false);
@@ -233,15 +236,15 @@ function Home() {
         else{
           openNotification('Thất bại', 'Thêm sản phẩm thất bại', 'error')
         }
-      }
-      // await patchProducts(newProduct[0]);
     }
   }
 
-  const handleFilter = (values) => {
+  const handleFilter = async (values) => {
     const { brand, category, price } = values;
+
+    const data = await getProducts();
   
-    let filtered = [...products];
+    let filtered = [...data];
   
     // Lọc theo thương hiệu
     if (brand && brand !== "Tất cả") {

@@ -11,24 +11,42 @@ function ManageShop() {
   const [users, setUsers] = useState([]);
 
   const getHistory = async () => {
-    const response = await fetch(`http://localhost:3002/history`);
+    const response = await fetch(`/order/admin/get/all`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${sessionStorage.getItem('token')}`
+      }
+    });
     const data = await response.json();
-    setHistory(data);
-    return data;
+    setHistory(data.data.data);
+    return data.data.data;
   }
 
   const getContacts = async () => {
-    const respnse = await fetch(`http://localhost:3002/contacts`);
+    const respnse = await fetch(`/contact/admin/all`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${sessionStorage.getItem('token')}`
+      }
+    });
     const data = await respnse.json();
-    setContacts(data);
-    return data;
+    setContacts(data.data);
+    return data.data;
   }
 
   const getUsers = async () => {
-    const response = await fetch(`http://localhost:3002/users`);
+    const response = await fetch(`/users/user/all`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${sessionStorage.getItem('token')}`
+      }
+    });
     const data = await response.json();
-    setUsers(data);
-    return data;
+    setUsers(data.data);
+    return data.data;
   }
 
   useEffect(() => {
@@ -44,7 +62,7 @@ function ManageShop() {
 
     history.forEach((item) => {
       // Sử dụng Regex để tách ngày, tháng, năm từ chuỗi
-      const match = item.time.match(/ngay (\d{1,2}) thang (\d{1,2}) nam (\d{4})/);
+      const match = item.time.match(/ngày (\d{1,2}) tháng (\d{1,2}) năm (\d{4})/);
       if (!match) return;
 
       const [_, day, month, year] = match;

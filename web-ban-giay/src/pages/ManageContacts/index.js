@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Table, Tag, Button, Modal, message, Tooltip } from 'antd';
+import { Table, Tag, Button, Modal, Tooltip } from 'antd';
 import './ManageContacts.scss';
 
 function ManageContacts() {
@@ -8,18 +8,24 @@ function ManageContacts() {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const getContacts = async () => {
-    const response = await fetch(`http://localhost:3002/contacts`);
+    const response = await fetch(`/contact/admin/all`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
+      },
+    });
     const data = await response.json();
-    setContacts(data.reverse());
+    setContacts(data.data.reverse());
   };
 
   const patchContact = async (updatedContact) => {
-    const response = await fetch(`http://localhost:3002/contacts/${updatedContact.id}`, {
-      method: 'PATCH',
+    const response = await fetch(`/contact/admin/solve?contactId=${updatedContact.id}`, {
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
       },
-      body: JSON.stringify(updatedContact),
     })
     return await response.json();
   }
@@ -32,11 +38,10 @@ function ManageContacts() {
     setSelectedContact(contact);
     setIsModalVisible(true);
 
-    if (!contact.isRead) {
+    if (contact.status === 'Chưa đọc') {
       const updatedContacts = contact;
-      updatedContacts.isRead = true;
+      updatedContacts.status = 'Đã đọc';
       await patchContact(updatedContacts);
-      message.success(`Liên hệ của ${contact.fullName} đã được đánh dấu là đã đọc`);
     }
   };
 
@@ -67,7 +72,7 @@ function ManageContacts() {
     },
     {
       title: 'Số điện thoại',
-      dataIndex: 'phone',
+      dataIndex: 'phoneNumber',
       key: 'phone',
       align: 'center',
     },
@@ -84,10 +89,10 @@ function ManageContacts() {
     },
     {
       title: 'Trạng thái',
-      key: 'isRead',
+      key: 'status',
       align: 'center',
       render: (_, record) => (
-        record.isRead ? <Tag color="green">Đã đọc</Tag> : <Tag color="red">Chưa đọc</Tag>
+        record.status === 'Đã đọc' ? <Tag color="green">Đã đọc</Tag> : <Tag color="red">Chưa đọc</Tag>
       ),
     },
     {
@@ -122,7 +127,7 @@ function ManageContacts() {
           <div>
             <p><strong>Họ và tên:</strong> {selectedContact.fullName}</p>
             <p><strong>Email:</strong> {selectedContact.email}</p>
-            <p><strong>Số điện thoại:</strong> {selectedContact.phone}</p>
+            <p><strong>Số điện thoại:</strong> {selectedContact.phoneNumber}</p>
             <p><strong>Nội dung:</strong> {selectedContact.content}</p>
           </div>
         )}

@@ -13,35 +13,35 @@
     },
     {
       "id": "1",
-      "fullName": "John Doe",
-      "email": "johndoe@example.com",
+      "fullName": "Nguyễn Hoàng Hiệp",
+      "email": "nguyenhoanghiep@gmail.com",
       "password": "hashed_password",
-      "role": "customer",
-      "token": "d3f7a8b92c41e7e4f6g8",
-      "address": "123 Maple Street, Springfield",
-      "phone": "123-456-7890",
+      "role": "User",
+      "token": "383ha812hf93hf93hfq3",
+      "address": "PTIT",
+      "phone": "0987654321",
       "isActive": true
     },
     {
       "id": "2",
-      "fullName": "Jane Doe",
-      "email": "janedoe@example.com",
+      "fullName": "Nguyễn Văn A",
+      "email": "nguyenvana@gmail.com",
       "password": "hashed_password",
-      "role": "customer",
-      "token": "4h9f0b2c87d2e7f6g5h3",
-      "address": "456 Oak Avenue, Metropolis",
-      "phone": "234-567-8901",
+      "role": "Admin",
+      "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuZ3V5ZW52YW5hQGdtYWlsLmNvbSIsImV4cCI6MTczMzMxNjQ1Nywicm9sZXMiOlsiQURNSU4iXX0.ZngEX_baXPTvFNSfKibLFbyHQJXqXJnfk2_z0p9gbqc",
+      "address": "PTIT",
+      "phone": "0123456789",
       "isActive": false
     },
     {
       "id": "3",
-      "fullName": "Mark Smith",
-      "email": "marksmith@example.com",
+      "fullName": "124124",
+      "email": "14241",
       "password": "hashed_password",
       "role": "customer",
       "token": "5j3k9a4c76h8b2e5f6j7",
-      "address": "789 Pine Road, Gotham",
-      "phone": "345-678-9012",
+      "address": "124124",
+      "phone": "124412",
       "isActive": true
     },
     {
@@ -466,7 +466,7 @@
       "size": [
         {
           "size": 38,
-          "stock": 0
+          "stock": 5
         },
         {
           "size": 39,
@@ -1263,6 +1263,113 @@
         {
           "size": "14",
           "stock": 14
+        }
+      ]
+    },
+    {
+      "id": "5d13",
+      "name": "12",
+      "image": "12",
+      "description": "124",
+      "brand": "124",
+      "category": "124",
+      "price": 124,
+      "size": [
+        {
+          "size": "12",
+          "stock": 12
+        },
+        {
+          "size": "13",
+          "stock": 11
+        },
+        {
+          "size": "1",
+          "stock": 1
+        }
+      ]
+    },
+    {
+      "id": "0332",
+      "name": "1",
+      "image": "1",
+      "description": "1",
+      "brand": "1",
+      "category": "1",
+      "price": 1,
+      "size": [
+        {
+          "size": "1",
+          "stock": 11
+        },
+        {
+          "size": "1",
+          "stock": 1
+        },
+        {
+          "size": "1",
+          "stock": 1
+        }
+      ]
+    },
+    {
+      "id": "baae",
+      "name": "1",
+      "urlImage": "1",
+      "description": "1",
+      "brandName": "1",
+      "categoryName": "1",
+      "price": 1,
+      "addSizeRequests": [
+        {
+          "size": "1",
+          "stock": 1
+        },
+        {
+          "size": "2",
+          "stock": 2
+        },
+        {
+          "size": "3",
+          "stock": 3
+        }
+      ]
+    },
+    {
+      "id": "ca92",
+      "name": "1",
+      "urlImage": "1",
+      "description": "1",
+      "brandName": "1",
+      "categoryName": "1",
+      "price": 1,
+      "addSizeRequests": [
+        {
+          "size": "1",
+          "stock": 1
+        },
+        {
+          "size": "2",
+          "stock": 2
+        }
+      ]
+    },
+    {
+      "id": "d238",
+      "name": "1",
+      "urlImage": "1",
+      "description": "1",
+      "brandName": "1",
+      "categoryName": "1",
+      "price": 1,
+      "addSizeRequests": [
+        {
+          "size": "1",
+          "quantity": 1
+        },
+        {
+          "size": "2",
+          "quantity": 2
         }
       ]
     }
@@ -4687,11 +4794,13 @@
   "contacts": [
     {
       "id": "1",
-      "fullName": "Nguyễn Hoàng Hiệp ",
+      "fullName": "Nguyễn Hoàng Hiệp",
       "email": "hiep2804@gmail.com",
       "phone": "123",
-      "content": "abcd",
-      "isRead": true
+      "content": "alo alo",
+      "isRead": true,
+      "phoneNumber": "0123654987",
+      "status": "Đã đọc"
     },
     {
       "id": "d87c",

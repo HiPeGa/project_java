@@ -4,18 +4,18 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 function Register() {
 
-  const [user, setUser] = useState();
+  // const [user, setUser] = useState();
 
-  const getUser = async () => {
-    const response = await fetch('http://localhost:3002/users');
-    const user_tmp = await response.json();
-    setUser(user_tmp);
-    return user_tmp;
-  }
+  // const getUser = async () => {
+  //   const response = await fetch('http://localhost:3002/users');
+  //   const user_tmp = await response.json();
+  //   setUser(user_tmp);
+  //   return user_tmp;
+  // }
 
-  useEffect(() => {
-    getUser();
-  }, [])
+  // useEffect(() => {
+  //   getUser();
+  // }, [])
 
   const [api, contextHolder] = notification.useNotification();
   const openNotification = (message, description, type) => {
@@ -28,39 +28,40 @@ function Register() {
 
   const navigate = useNavigate();
 
-  const registerAccount = async (fullName, email, password, token, address, phone, isActive) => {
-    const response = await fetch('http://localhost:3002/users', {
+  const registerAccount = async (fullname, email, password) => {
+    const response = await fetch('/login/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ fullName, email, password, role: "customer", token, address, phone, isActive})
+      body: JSON.stringify({ fullname, email, password})
     })
     return await response.json();
   }
 
-  const generateRandomString = (length = 20) => {
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    let result = '';
-    const charactersLength = characters.length;
+  // const generateRandomString = (length = 20) => {
+  //   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  //   let result = '';
+  //   const charactersLength = characters.length;
     
-    for (let i = 0; i < length; i++) {
-      result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
+  //   for (let i = 0; i < length; i++) {
+  //     result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  //   }
     
-    return result;
-  }
+  //   return result;
+  // }
 
   const handleSubmit = async (e) => {
-    const token = generateRandomString();
-    const response = await fetch(`http://localhost:3002/users?email=${e.email}`);
-    const checkExitsEmail = await response.json();
+    // const token = generateRandomString();
+    // const response = await fetch(`http://localhost:3002/users?email=${e.email}`);
+    // const checkExitsEmail = await response.json();
 
-    if(checkExitsEmail.length > 0){
+    const response = await registerAccount(e.fullName, e.email, e.password);
+
+    if(response.description === "Email already exists"){ 
       openNotification('Thất bại', 'Email đã tồn tại', 'error');
     }
     else{
-      const response = await registerAccount(e.fullName, e.email, e.password, token , null, null, true); 
       if(response){
         openNotification('Thành công', 'Đăng ký thành công', 'success')
         setTimeout(() => {

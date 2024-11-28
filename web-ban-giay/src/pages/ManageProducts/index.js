@@ -14,6 +14,7 @@ import {
 } from "antd";
 import { useEffect, useState } from "react";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+import './ManageProducts.scss';
 
 function ManageProducts() {
   const [products, setProducts] = useState([]);
@@ -24,16 +25,34 @@ function ManageProducts() {
   const [currentStock, setCurrentStock] = useState(0); // Thêm state để lưu stock khi chọn size
   const [isAddModalVisible, setIsAddModalVisible] = useState(false); // Hiển thị modal thêm sản phẩm
   const [addForm] = Form.useForm(); // Form cho modal thêm sản phẩm
+  const [brands, setBrands] = useState([]);
+  const [categories, setCategories] = useState([]);
 
   const getProducts = async () => {
-    const response = await fetch(`http://localhost:3002/products`);
-    const tmp = await response.json();
-    setProducts(tmp.reverse());
-    return tmp;
+    const response = await fetch(`/product/user/all`);
+    const data = await response.json();
+    setProducts(data.data.reverse());
+    return data.data;
   };
+
+  const getBrands = async () => {
+    const response = await fetch(`/brand/get/all`);
+    const data = await response.json();
+    setBrands(data.data);
+    return data.data;
+  }
+
+  const getCategories = async () => {
+    const response = await fetch(`/category/get/all`);
+    const data = await response.json();
+    setCategories(data.data);
+    return data.data;
+  }
 
   useEffect(() => {
     getProducts();
+    getBrands();
+    getCategories();
   }, []);
 
   const handleChangeSize = (value, productId) => {
@@ -83,28 +102,29 @@ function ManageProducts() {
       }));
 
       const updatedProduct = {
-        ...editingProduct,
+        productId: editingProduct.id,
         name: values.name,
-        image: values.image,
+        urlImage: values.image,
         description: values.description,
-        brand: values.brand,
-        category: values.category,
+        brandName: values.brand,
+        categoryName: values.category,
         price: values.price,
-        size: updatedSizes, // Cập nhật danh sách size
+        addSizeRequest: {
+          size: editingProduct.size[values.selectedSize].size,
+          quantity: values.stock
+        }, // Cập nhật danh sách size
       };
-
-      await fetch(`http://localhost:3002/products/${editingProduct.id}`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
+      await fetch(`/product/admin/update`, {
+        method: "POST",
+        headers: { 
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${sessionStorage.getItem("token")}`,
+         },
         body: JSON.stringify(updatedProduct),
       });
 
       message.success("Cập nhật sản phẩm thành công!");
-      setProducts(
-        products.map((product) =>
-          product.id === editingProduct.id ? updatedProduct : product
-        )
-      );
+      await getProducts(); // Load lại danh sách sản phẩm
       setIsEditModalVisible(false);
     } catch (error) {
       message.error("Có lỗi xảy ra khi cập nhật sản phẩm!");
@@ -120,8 +140,12 @@ function ManageProducts() {
       cancelText: "Hủy",
       onOk: async () => {
         try {
-          await fetch(`http://localhost:3002/products/${record.id}`, {
+          await fetch(`/product/admin/delete?id=${record.id}`, {
             method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+             },
           });
           message.success("Xóa sản phẩm thành công!");
           setProducts(products.filter((product) => product.id !== record.id));
@@ -139,14 +163,26 @@ function ManageProducts() {
         ...values,
         size: values.size.map((item, index) => ({
           size: item.size,
-          stock: item.stock,
+          quantity: item.stock,
         })),
       };
   
-      await fetch(`http://localhost:3002/products`, {
+      const response = await fetch(`/product/admin/create`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(newProduct),
+        headers: { "Content-Type": "application/json",
+          "Authorization": `Bearer ${sessionStorage.getItem("token")}`,
+         },
+        body: JSON.stringify(
+          {
+            name: newProduct.name,
+            urlImage: newProduct.image,
+            description: newProduct.description,
+            brandName: newProduct.brand,
+            categoryName: newProduct.category,
+            price: newProduct.price,
+            addSizeRequests: newProduct.size
+          }
+        ),
       });
   
       message.success("Thêm sản phẩm mới thành công!");
@@ -440,14 +476,14 @@ function ManageProducts() {
               label="Thương hiệu"
               rules={[{ required: true, message: "Vui lòng nhập thương hiệu!" }]}
             >
-              <Input />
+              <Select options={brands.map(item => ({value: item.name, label: item.name}))} />
             </Form.Item>
             <Form.Item
               name="category"
               label="Loại sản phẩm"
               rules={[{ required: true, message: "Vui lòng nhập loại sản phẩm!" }]}
             >
-              <Input />
+              <Select options={categories.map(item => ({value: item.name, label: item.name}))} />
             </Form.Item>
             <Form.Item
               name="price"

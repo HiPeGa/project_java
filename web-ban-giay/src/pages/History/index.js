@@ -7,10 +7,10 @@ function History() {
   const userId = sessionStorage.getItem('id');
 
   const getProductsInHistory = async () => {
-    const response = await fetch(`http://localhost:3002/history?userId=${userId}`);
-    const tmp = await response.json();
-    setProductsInHistory(tmp.reverse());
-    return tmp;
+    const response = await fetch(`/order/user/get?userId=${userId}`);
+    const data = await response.json();
+    setProductsInHistory(data.data.reverse());
+    return data.data;
   }
   useEffect(() => {
     getProductsInHistory();

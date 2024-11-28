@@ -15,22 +15,22 @@ const Contact = () => {
     });
   };
 
-  const [contacts, setContacts] = useState([]);
+  // const [contacts, setContacts] = useState([]);
 
-  const getContacts = async () => {
-    const response = await fetch(`http://localhost:3002/contacts`);
-    const tmp = await response.json();
-    setContacts(tmp);
-    return tmp;
-  }
+  // const getContacts = async () => {
+  //   const response = await fetch(`http://localhost:3002/contacts`);
+  //   const tmp = await response.json();
+  //   setContacts(tmp);
+  //   return tmp;
+  // }
 
-  useEffect(() => {
-    getContacts();
-  }, []);
+  // useEffect(() => {
+  //   getContacts();
+  // }, []);
 
 
   const postContact = async (contact) => {
-    const response = await fetch(`http://localhost:3002/contacts`, {
+    const response = await fetch(`/contact/user/create`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -45,9 +45,8 @@ const Contact = () => {
     const email = e.email;
     const phone = e.phone;
     const content = e.message;
-    const isRead = false;
 
-    const contact = { fullName, email, phone, content, isRead };
+    const contact = { fullName, email, phone, content};
 
     const response = await postContact(contact);
 

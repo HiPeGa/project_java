@@ -18,13 +18,19 @@ function Login() {
   };
 
   const checkInfomation = async (email, password) => {
-    const response = await fetch(`http://localhost:3002/users?email=${email}&password=${password}`);
+    const response = await fetch(`/login/signin?email=${email}&password=${password}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
     const data = await response.json();
-    return data[0];
+    return data.data;
   }
 
   const handleSubmit = async (e) => {
     const response = await checkInfomation(e.email, e.password);
+    console.log(response);
     if(response){
       if(response.isActive){
         sessionStorage.setItem('token', response.token);

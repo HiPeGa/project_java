@@ -9,19 +9,19 @@ function ManageUsers() {
   const [users, setUsers] = useState([]);
 
   const getUsers = async () => {
-    const response = await fetch(`http://localhost:3002/users`);
+    const response = await fetch(`/users/user/all`);
     const data = await response.json();
-    setUsers(data);
-    return data;
+    setUsers(data.data);
+    return data.data;
   }
 
   const patchUser = async (e) => {
-    const response = await fetch(`http://localhost:3002/users/${e.id}`, {
-      method: 'PATCH',
+    const response = await fetch(`/users/admin/handle/${e.id}`, {
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
       },
-      body: JSON.stringify(e),
     });
     return await response.json();
   }
@@ -34,7 +34,7 @@ function ManageUsers() {
     const newUser = {...e, isActive: !e.isActive};
     const response = await patchUser(newUser);
     if(response){
-      if(response.isActive){
+      if(newUser.isActive){
         message.success('Kích hoạt thành công');
       }
       else message.warning('Đã vô hiệu hóa');
@@ -65,7 +65,7 @@ function ManageUsers() {
         return (
           <>
             {
-              record.role === "admin" ? (
+              record.role === "Admin" ? (
                 <span style={{color: "red"}}>Admin</span>
               ) : (
                 <span style={{color: "blue"}}>User</span>

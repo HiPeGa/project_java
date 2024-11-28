@@ -129,35 +129,37 @@ create table orders(
     user_id int,
     status varchar(100),
     total_amount int,
+    full_name varchar(255),
+    phone_number varchar(255),
+    email varchar(255),
     shipping_method varchar(255),
     address text,
-    phone_number_receive varchar(50),
-    receive_name varchar(255),
+    delivery_time varchar(50),
+    note varchar(255),
     created_at timestamp default current_timestamp
 );
 
-INSERT INTO orders (user_id, status, total_amount, shipping_method, address, phone_number_receive, receive_name, created_at) VALUES
-(1, 1, 150, 'Standard Shipping', '123 Example Street', '123456789', 'Nguyễn Hoàng Hiệp', '2024-11-11 23:01:00'),
-(2, 1, 150, 'Standard Shipping', '456 Another Street', '987654321', 'Nguyễn Hoàng Hiệp', '2024-11-11 23:02:00'),
-(2, 1, 150, 'Standard Shipping', '789 Third Street', '123789456', 'Nguyễn Hoàng Hiệp', '2024-11-12 00:40:00'),
-(1, 1, 180, 'Standard Shipping', '101 Example Ave', '321654987', 'Nguyễn Hoàng Hiệp', '2024-11-12 00:40:00');
+INSERT INTO orders (user_id, status, total_amount, full_name, phone_number, email, shipping_method, address, delivery_time, note) VALUES
+(1, 1, 150, 'Nguyễn Văn A', '0987654321', 'nguyena@gmail.com', 'Hỏa tốc', '123 Example Street', '08:00 - 09:00', 'Không có ghi chú'),
+(2, 1, 150, 'Nguyễn Hoàng Hiệp', '0123456789', 'nguyenhoanghiep@gmail.com', 'Hỏa tốc', '456 Another Street', '08:00 - 09:00', 'Không có ghi chú'),
+(2, 1, 150, 'Nguyễn Hoàng Hiệp', '0123456789', 'nguyenhoanghiep@gmail.com', 'Hỏa tốc', '789 Third Street', '08:00 - 09:00', 'Không có ghi chú'),
+(1, 1, 180, 'Nguyễn Văn A', '0987654321', 'nguyena@gmail.com', 'Hỏa tốc', '101 Example Ave', '08:00 - 09:00', 'Không có ghi chú');
 
 create table order_item(
 	order_id int,
     product_id int,
     quantity int,
     price int,
-    note text,
     size int,
     created_at timestamp default current_timestamp,
     primary key(order_id,product_id)
 );
 
-INSERT INTO order_item (order_id, product_id, quantity, price, note, size, created_at) VALUES
-(1, 1, 1, 150, 'Nike Air Max thiết kế hiện đại và phong cách, phù hợp cho mọi hoạt động.', 41, '2024-11-11 23:01:00'),
-(2, 1, 1, 150, 'Nike Air Max thiết kế hiện đại và phong cách, phù hợp cho mọi hoạt động.', 42, '2024-11-11 23:02:00'),
-(3, 1, 1, 150, 'Nike Air Max thiết kế hiện đại và phong cách, phù hợp cho mọi hoạt động.', 43, '2024-11-11 23:11:00'),
-(4, 2, 1, 180, 'Nike Air Max thiết kế hiện đại và phong cách, phù hợp cho mọi hoạt động.', 40, '2024-11-11 23:18:00');
+INSERT INTO order_item (order_id, product_id, quantity, price, size) VALUES
+(1, 1, 1, 150, 41),
+(2, 1, 1, 150, 42),
+(3, 1, 1, 150, 43),
+(4, 2, 1, 180, 40);
 
 CREATE TABLE cart (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -166,8 +168,8 @@ CREATE TABLE cart (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-INSERT INTO cart (user_id, total_amout, created_at)
-VALUES (2, 150, NOW());
+INSERT INTO cart (user_id, total_amout)
+VALUES (2, 150);
 
 CREATE TABLE cart_item (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -175,13 +177,12 @@ CREATE TABLE cart_item (
     product_id INT,
     quantity INT,
     price int,
-    note text,
     size int,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-INSERT INTO cart_item (cart_id, product_id, quantity, price, note, size, created_at)
-VALUES (1, 1, 1, 150, 'Nike Air Max thiết kế hiện đại và phong cách, phù hợp cho mọi hoạt động.', 41, NOW());
+INSERT INTO cart_item (cart_id, product_id, quantity, price, size)
+VALUES (1, 1, 1, 150, 41);
 
 CREATE TABLE contact (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -193,8 +194,8 @@ CREATE TABLE contact (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-INSERT INTO contact (full_name, email, phone, content, is_read, created_at) VALUES
-('Nguyễn Hoàng Hiệp', 'hiep2804@gmail.com', '0123654987', 'alo alo', TRUE, NOW());
+INSERT INTO contact (full_name, email, phone, content, is_read) VALUES
+('Nguyễn Hoàng Hiệp', 'hiep2804@gmail.com', '0123654987', 'alo alo', TRUE);
 
 alter table users add constraint fk_users_role_id foreign key(role_id) references roles(id);
 alter table product add constraint fk_product_category_id foreign key(category_id) references category(id);

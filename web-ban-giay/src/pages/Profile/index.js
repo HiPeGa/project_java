@@ -20,15 +20,13 @@ function Profile() {
   const [isEditing, setIsEditing] = useState(false);
   const [form] = Form.useForm();
 
-  const patchPassword = async (newPassword) => {
-    const response = await fetch(`http://localhost:3002/users/${id}`, {
-      method: 'PATCH',
+  const patchPassword = async (e) => {
+    console.log(e);
+    const response = await fetch(`/users/user/change/password?id=${id}&oldPassword=${e.oldPassword}&newPassword=${e.newPassword}`, {
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        password: newPassword
-      })
     })
     return await response.json();
   }
@@ -40,7 +38,7 @@ function Profile() {
     navigate('/register');
   }
   const handleLogOut = () => {
-    sessionStorage.removeItem("token");
+    sessionStorage.clear();
     navigate('/');
     dispatch(logoutAccount());
     message.success('Đăng xuất thành công!');
@@ -61,11 +59,8 @@ function Profile() {
     if(e.newPassword !== e.confirmPassword) {
       message.error('Mật khẩu xác nhận không khớp!');
     }
-    else if(user[0].password !== e.oldPassword) {
-      message.error('Mật khẩu không chính xác')
-    }
     else {
-      const response = await patchPassword(e.newPassword);
+      const response = await patchPassword(e);
       console.log(response);
       if(response) {
         message.success('Đổi mật khẩu thành công!');
@@ -78,20 +73,20 @@ function Profile() {
     }
   }
 
-  const getUser = async (token) => {
-    const response = await fetch(`http://localhost:3002/users?token=${token}`);
-    const tmp = await response.json();
-    setUser(tmp);
-    return tmp;
+  const getUser = async () => {
+    const response = await fetch(`/users/user/me?id=${id}`);
+    const data = await response.json();
+    setUser(data.data);
+    return data.data;
   }
 
-  const patchUser = async (user) => {
-    const response = await fetch(`http://localhost:3002/users/${id}`, {
-      method: 'PATCH',
+  const patchUser = async (user_new) => {
+    console.log(user_new)
+    const response = await fetch(`/users/user/change/information?id=${user_new.id}&phone=${user_new.phone}&address=${user_new.address}`, {
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(user)
     })
     return await response.json();
   }
@@ -106,7 +101,7 @@ function Profile() {
   const items = isLogin || token ? [
     {
       key: '1',
-      label: <div className='profile__name'>{user[0]?.fullName}</div>
+      label: <div className='profile__name'>{user?.fullName}</div>
     },
     {
       key: '2',
@@ -126,11 +121,11 @@ function Profile() {
     }
   ] : [
     {
-      key: '1',
+      key: '6',
       label: <Button onClick={handleLogin}>Đăng nhập</Button>
     },
     {
-      key: '2',
+      key: '7',
       label: <Button onClick={handleRegister}>Đăng ký</Button>
     }
   ]
@@ -158,18 +153,14 @@ function Profile() {
     message.success('Thông tin tài khoản đã được cập nhật!');
     setIsEditing(false); // Tắt chế độ chỉnh sửa sau khi lưu
 
-    const new_user = {...user[0], 
-      fullName: e.fullName,
-      email: e.email,
+    const new_user = {
+      id: id,
       phone: e.phone,
       address: e.address
     }
-    sessionStorage.setItem('address', new_user.address)
-
-    const response = await patchUser(new_user);
+    await patchUser(new_user);
     setIsModalVisible(false);
   };
-
 
   return (
     <div className="profile">
@@ -182,7 +173,7 @@ function Profile() {
         onCancel={handleCancel}
         footer={false}
       >
-        <Form layout="vertical" onFinish={handleSubmit} initialValues={user[0]} form={form}>
+        <Form layout="vertical" onFinish={handleSubmit} initialValues={user} form={form}>
           <Form.Item label="Họ tên" name="fullName">
             <Input
               disabled={!isEditing} // Khóa chỉnh sửa khi không ở chế độ chỉnh sửa

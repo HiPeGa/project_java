@@ -10,6 +10,7 @@ import {
   Row,
   Col,
 } from "antd";
+import './ManageOrders.scss';
 
 const { Option } = Select;
 
@@ -18,21 +19,27 @@ const ManageOrders = () => {
   const [filterStatus, setFilterStatus] = useState("Tất cả");
 
   const getOrders = async () => {
-    const response = await fetch(`http://localhost:3002/history`);
+    const response = await fetch(`/order/admin/get/all`, {
+      method: "GET",
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
+      },
+    });
     const data = await response.json();
-    setOrders(data.reverse());
-    return data;
+    setOrders(data.data.data.reverse());
+    return data.data.data;
   };
 
   const patchOrder = async (updateOrder) => {
     const response = await fetch(
-      `http://localhost:3002/history/${updateOrder.id}`,
+      `/order/admin/solve?orderId=${updateOrder.id}`,
       {
-        method: "PATCH",
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
+          'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
         },
-        body: JSON.stringify(updateOrder),
       }
     );
     return await response.json();
@@ -95,6 +102,10 @@ const ManageOrders = () => {
           <p>
             <strong>Size: </strong>
             {record.productSize}
+          </p>
+          <p>
+            <strong>Số lượng: </strong>
+            {record.productQuantity}
           </p>
           <p>
             <strong>Tổng tiền:</strong>{" "}

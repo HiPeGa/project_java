@@ -15,7 +15,7 @@
     text-align: center;
 
     .home__title {
-      font-size: 28px;
+      font-size: 32px;
       font-weight: 600;
       color: #333;
       margin-bottom: 20px;
@@ -24,26 +24,8 @@
     form {
       display: flex;
       gap: 15px;
+      justify-content: space-between;
       margin-bottom: 20px;
-
-      .ant-input {
-        height: 40px;
-        border-radius: 6px;
-        background-color: #f0f0f0;
-        border: 1px solid #d9d9d9;
-        flex: 1;
-      }
-      .ant-btn {
-        height: 40px;
-        min-width: 140px;
-        padding: 0 20px;
-        background-color: #1890ff;
-        border-radius: 6px;
-        color: #ffffff;
-        border: none;
-        font-weight: bold;
-        font-size: 20px;
-      }
 
       .ant-form-item {
         flex: 1;
@@ -51,6 +33,7 @@
         .ant-select-selector {
           height: 40px;
           border-radius: 6px;
+          color: #08203d !important;
           background-color: #f0f0f0;
           border: 1px solid #d9d9d9;
         }
@@ -59,10 +42,26 @@
           height: 40px;
           min-width: 140px;
           padding: 0 20px;
-          background-color: #1890ff;
+          background-color: #08203d;
           border-radius: 6px;
           color: #ffffff;
           border: none;
+          &:hover{
+            background-color: #ffffff;
+            color: #08203d;
+            border: solid 1px #08203d;
+          }
+          &:active{
+            @keyframes scale-down-center {
+              0% {
+                        transform: scale(1);
+              }
+              100% {
+                        transform: scale(0.9);
+              }
+            }
+            animation: scale-down-center 0.01s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+          }
         }
       }
     }
@@ -75,10 +74,23 @@
   gap: 15px;
 
   .product__item {
-    background-color: #ffffff;
+    background-color: #08203d;
     border-radius: 6px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
+
+    @keyframes slide-top {
+      0% {    
+                transform: translateY(0);
+      }
+      100% {
+                transform: translateY(-20px);
+      }
+    }
+    &:hover{
+      background-color: #0c2e57;
+      animation: slide-top 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    }
 
     .product__image img {
       width: 100%;
@@ -93,19 +105,19 @@
       .product__name {
         font-size: 18px;
         font-weight: 700;
-        color: #333;
+        color: #ffffff;
         margin: 0;
       }
 
       .product__description {
         font-size: 14px;
-        color: #666;
+        color: #dcdada;
         margin: 5px 0;
       }
 
       .product__price {
         font-size: 18px;
-        color: #e63946;
+        color: #d8e639;
         font-weight: bold;
         margin-top: 10px;
       }
@@ -115,7 +127,7 @@
 
 .product__detail {
   padding: 20px;
-  background-color: #ffffff;
+  background-color: #08203d;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 
@@ -129,20 +141,20 @@
     h3 {
       margin-top: 0px;
       font-size: 22px;
-      color: #333;
+      color: #ffffff;
       font-weight: 700;
       margin-bottom: 10px;
     }
 
     p {
       font-size: 14px;
-      color: #666;
+      color: #dcdada;
       margin: 5px 0;
     }
 
     .product__detail-price {
       font-size: 22px;
-      color: #e63946;
+      color: #d8e639;
       font-weight: bold;
       margin-top: 15px;
     }
@@ -150,16 +162,39 @@
 
   button {
     padding: 8px 20px;
-    background-color: #1890ff;
+    background-color: #12e22a;
     border-radius: 6px;
-    color: #ffffff;
+    color: #000000;
     font-size: 14px;
     border: none;
     margin-top: 15px;
+    &:hover{
+      background-color: #7bf07b !important;
+      color:  #000000 !important;
+    }
   }
-
+  
   button:disabled {
-    background-color: #d9d9d9;
+    background-color: #7bf07b;
     cursor: not-allowed;
+  }
+}
+.change-color1{
+  color: #ff7f35 !important;
+}
+.area-focus{
+  &:focus{
+    @keyframes scale-up-center-1 {
+      0% {
+                transform: scale(1);
+      }
+      100% {
+                transform: scale(1.04);
+      }
+    }
+    animation: scale-up-center-1 0.5s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+  }
+  &:hover{
+    border: #08203d solid 1px;
   }
 }

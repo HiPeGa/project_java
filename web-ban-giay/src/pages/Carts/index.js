@@ -31,6 +31,7 @@ const ProductTable = () => {
   const [user, setUser] = useState({});
   const navigate = useNavigate();
   const [shippingFee, setShippingFee] = useState(30000);
+  const id = sessionStorage.getItem('id');
 
   const handleSelect = (id, isChecked) => {
     setSelectedRowKeys((prev) =>
@@ -41,47 +42,45 @@ const ProductTable = () => {
   const userId = sessionStorage.getItem("id");
 
   const getProductsInCart = async () => {
-    const response = await fetch(
-      `http://localhost:3002/carts?userId=${userId}`
-    );
-    const tmp = await response.json();
-    setProductsInCart(tmp.reverse());
-    return tmp;
+    const response = await fetch(`/cart/get?userId=${userId}`);
+    const data = await response.json();
+    setProductsInCart(data.data.reverse());
+    return data.data;
   };
 
   const getProducts = async () => {
-    const response = await fetch(`http://localhost:3002/products`);
-    const tmp = await response.json();
-    setProducts(tmp);
-    return tmp;
+    const response = await fetch(`/product/user/all`);
+    const data = await response.json();
+    setProducts(data.data);
+    return data.data;
   };
 
   const getUser = async () => {
-    const response = await fetch(`http://localhost:3002/users/${userId}`);
-    const tmp = await response.json();
-    setUser(tmp);
-    return tmp;
+    const response = await fetch(`/users/user/me?id=${id}`);
+    const data = await response.json();
+    setUser(data.data);
+    return data.data;
   };
 
-  const getProductIsDeleted = async (id) => {
-    const response = await fetch(`http://localhost:3002/products/${id}`);
-    const tmp = await response.json();
-    return tmp;
-  };
+  // const getProductIsDeleted = async (id) => {
+  //   const response = await fetch(`http://localhost:3002/products/${id}`);
+  //   const tmp = await response.json();
+  //   return tmp;
+  // };
 
-  const patchProductIsDeleted = async (productIsDeleted) => {
-    const response = await fetch(
-      `http://localhost:3002/products/${productIsDeleted.id}`,
-      {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(productIsDeleted),
-      }
-    );
-    return await response.json();
-  };
+  // const patchProductIsDeleted = async (productIsDeleted) => {
+  //   const response = await fetch(
+  //     `http://localhost:3002/products/${productIsDeleted.id}`,
+  //     {
+  //       method: "PATCH",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify(productIsDeleted),
+  //     }
+  //   );
+  //   return await response.json();
+  // };
 
   const [api, contextHolder] = notification.useNotification();
   const openNotification = (message, description, type) => {
@@ -99,7 +98,7 @@ const ProductTable = () => {
   }, []);
 
   const deleteProductsInCart = async (id) => {
-    const response = await fetch(`http://localhost:3002/carts/${id}`, {
+    const response = await fetch(`/cart/delete/item?cartItemId=${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -108,35 +107,35 @@ const ProductTable = () => {
     return await response.json();
   };
 
-  const postProductsOnHistory = async (product, values) => {
-    const now = new Date();
-    // Lấy ra các thông tin cần thiết
-    const dayOfWeek = now.toLocaleString("vi-VN", { weekday: "long" }); // Thứ
-    const day = now.getDate(); // Ngày
-    const month = now.getMonth() + 1; // Tháng (getMonth() trả về 0-11, nên cần +1)
-    const year = now.getFullYear(); // Năm
-    const hours = now.getHours(); // Giờ
-    const minutes = now.getMinutes(); // Phút
-    // Định dạng thành chuỗi
-    console.log(dayOfWeek);
-    const formattedDateTime =
-      dayOfWeek === "Chủ Nhật"
-        ? `${dayOfWeek}, ngày ${day} tháng ${month} năm ${year}, ${hours}:${minutes}`
-        : `Thứ ${dayOfWeek}, ngày ${day} tháng ${month} năm ${year}, ${hours}:${minutes}`;
+  // const postProductsOnHistory = async (product, values) => {
+  //   const now = new Date();
+  //   // Lấy ra các thông tin cần thiết
+  //   const dayOfWeek = now.toLocaleString("vi-VN", { weekday: "long" }); // Thứ
+  //   const day = now.getDate(); // Ngày
+  //   const month = now.getMonth() + 1; // Tháng (getMonth() trả về 0-11, nên cần +1)
+  //   const year = now.getFullYear(); // Năm
+  //   const hours = now.getHours(); // Giờ
+  //   const minutes = now.getMinutes(); // Phút
+  //   // Định dạng thành chuỗi
+  //   console.log(dayOfWeek);
+  //   const formattedDateTime =
+  //     dayOfWeek === "Chủ Nhật"
+  //       ? `${dayOfWeek}, ngày ${day} tháng ${month} năm ${year}, ${hours}:${minutes}`
+  //       : `Thứ ${dayOfWeek}, ngày ${day} tháng ${month} năm ${year}, ${hours}:${minutes}`;
 
-    const response = await fetch(`http://localhost:3002/history`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        ...product, ...values,
-        status: "Chờ xử lý",
-        time: formattedDateTime,
-      }),
-    });
-    return await response.json();
-  };
+  //   const response = await fetch(`http://localhost:3002/history`, {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify({
+  //       ...product, ...values,
+  //       status: "Chờ xử lý",
+  //       time: formattedDateTime,
+  //     }),
+  //   });
+  //   return await response.json();
+  // };
 
   // Hàm để xóa sản phẩm
   const handleDelete = (id) => {
@@ -147,6 +146,7 @@ const ProductTable = () => {
       cancelText: "Hủy",
       onOk: async () => {
         const responseDeleteProductsInCart = await deleteProductsInCart(id);
+        console.log(responseDeleteProductsInCart);
         if (responseDeleteProductsInCart) {
           openNotification("Thành công", "Xóa sản phẩm thành công", "success");
           // Thêm sản phẩm đã xóa về lại products
@@ -177,6 +177,16 @@ const ProductTable = () => {
     }
   };
 
+  const clearProductsInCart = async () => {
+    const response = await fetch(`/cart/delete/all?userId=${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    return await response.json();
+  }
+
   // Cột cho bảng
   const columns = [
     {
@@ -196,8 +206,8 @@ const ProductTable = () => {
           <input
             disabled={isOutOfStock || isNotEnoughStock}
             type="checkbox"
-            checked={selectedRowKeys.includes(record.id)}
-            onChange={(e) => handleSelect(record.id, e.target.checked)}
+            checked={selectedRowKeys.includes(record.cartItemId)}
+            onChange={(e) => handleSelect(record.cartItemId, e.target.checked)}
           />
         );
       },
@@ -287,7 +297,7 @@ const ProductTable = () => {
       key: "delete",
       render: (_, record) => (
         <DeleteOutlined
-          onClick={() => handleDelete(record.id)}
+          onClick={() => handleDelete(record.cartItemId)}
           style={{ color: "red", cursor: "pointer", fontSize: "18px" }}
         />
       ),
@@ -324,28 +334,34 @@ const ProductTable = () => {
       okText: "Xóa",
       cancelText: "Hủy",
       onOk: async () => {
-        for (const item of productsInCart) {
-          try {
-            // Xóa sản phẩm khỏi giỏ hàng
-            const responseDeleteProductsInCart = await deleteProductsInCart(
-              item.id
-            );
-            // const responseProductIsDeleted = await getProductIsDeleted(responseDeleteProductsInCart.productId);
-            // responseProductIsDeleted.size.forEach((item) => {
-            //   if(item.size === responseDeleteProductsInCart.productSize){
-            //     item.stock += responseDeleteProductsInCart.productQuantity;
-            //   }
-            // })
-            // await patchProductIsDeleted(responseProductIsDeleted);
-          } catch (error) {
-            openNotification(
-              "Thất bại",
-              "Đã xảy ra lỗi khi xóa sản phẩm",
-              "error"
-            );
-          }
+        // for (const item of productsInCart) {
+        //   try {
+        //     // Xóa sản phẩm khỏi giỏ hàng
+        //     const responseDeleteProductsInCart = await deleteProductsInCart(
+        //       item.id
+        //     );
+        //     // const responseProductIsDeleted = await getProductIsDeleted(responseDeleteProductsInCart.productId);
+        //     // responseProductIsDeleted.size.forEach((item) => {
+        //     //   if(item.size === responseDeleteProductsInCart.productSize){
+        //     //     item.stock += responseDeleteProductsInCart.productQuantity;
+        //     //   }
+        //     // })
+        //     // await patchProductIsDeleted(responseProductIsDeleted);
+        //   } catch (error) {
+        //     openNotification(
+        //       "Thất bại",
+        //       "Đã xảy ra lỗi khi xóa sản phẩm",
+        //       "error"
+        //     );
+        //   }
+        // }
+        const responseDeleteProductsInCart = await clearProductsInCart();
+        if(responseDeleteProductsInCart.description === 'Success') {
+          openNotification("Thành công", "Đã xóa toàn bộ sản phẩm", "success");
         }
-        openNotification("Thành công", "Đã xóa toàn bộ sản phẩm", "success");
+        else if(responseDeleteProductsInCart.description === 'Cart is empty') {
+          openNotification("Thất bại", "Giỏ hàng đang trống", "error");
+        }
 
         // Cập nhật lại giỏ hàng sau khi hoàn tất xóa
         setTimeout(() => {
@@ -357,7 +373,7 @@ const ProductTable = () => {
 
   const handlePayProductsInCart = () => {
     const selected = productsInCart.filter((product) =>
-      selectedRowKeys.includes(product.id)
+      selectedRowKeys.includes(product.cartItemId)
     );
 
     if (selected.length === 0) {
@@ -373,62 +389,98 @@ const ProductTable = () => {
     }
   };
 
-  const handleConfirmOrder = async () => {
-    let flag = false;
+  // const handleConfirmOrder = async () => {
+  //   let flag = false;
 
-    for (const itemProductInCart of selectedProducts) {
-      const product = products.find(
-        (item) => item.id === itemProductInCart.productId
-      );
+  //   for (const itemProductInCart of selectedProducts) {
+  //     const product = products.find(
+  //       (item) => item.id === itemProductInCart.productId
+  //     );
 
-      const quantity = product?.size.find(
-        (item) => item.size === itemProductInCart.productSize
-      );
+  //     const quantity = product?.size.find(
+  //       (item) => item.size === itemProductInCart.productSize
+  //     );
 
-      if (quantity?.stock >= itemProductInCart.productQuantity) {
-        try {
-          // Xóa sản phẩm khỏi giỏ hàng
-          const responseDeleteProductsInCart = await deleteProductsInCart(
-            itemProductInCart.id
-          );
-          await postProductsOnHistory(responseDeleteProductsInCart);
+  //     if (quantity?.stock >= itemProductInCart.productQuantity) {
+  //       try {
+  //         // Xóa sản phẩm khỏi giỏ hàng
+  //         const responseDeleteProductsInCart = await deleteProductsInCart(
+  //           itemProductInCart.id
+  //         );
+  //         await postProductsOnHistory(responseDeleteProductsInCart);
 
-          // Trừ số lượng sản phẩm trong trang Home
-          const responseProductIsDeleted = await getProductIsDeleted(
-            responseDeleteProductsInCart.productId
-          );
-          responseProductIsDeleted.size.forEach((item) => {
-            if (item.size === responseDeleteProductsInCart.productSize) {
-              item.stock -= responseDeleteProductsInCart.productQuantity;
-            }
-          });
-          await patchProductIsDeleted(responseProductIsDeleted);
-          flag = true;
-        } catch (error) {
-          openNotification("Thất bại", "Đặt hàng thất bại", "error");
-        }
+  //         // Trừ số lượng sản phẩm trong trang Home
+  //         const responseProductIsDeleted = await getProductIsDeleted(
+  //           responseDeleteProductsInCart.productId
+  //         );
+  //         responseProductIsDeleted.size.forEach((item) => {
+  //           if (item.size === responseDeleteProductsInCart.productSize) {
+  //             item.stock -= responseDeleteProductsInCart.productQuantity;
+  //           }
+  //         });
+  //         await patchProductIsDeleted(responseProductIsDeleted);
+  //         flag = true;
+  //       } catch (error) {
+  //         openNotification("Thất bại", "Đặt hàng thất bại", "error");
+  //       }
+  //     }
+  //   }
+
+  //   if (flag) {
+  //     openNotification(
+  //       "Thành công",
+  //       "Đã đặt hàng các sản phẩm đã chọn",
+  //       "success"
+  //     );
+  //   } else {
+  //     openNotification(
+  //       "Thất bại",
+  //       "Sản phẩm đã hết hoặc không đủ số lượng",
+  //       "error"
+  //     );
+  //   }
+
+  //   setIsModalOpen(false); // Đóng modal
+  //   setTimeout(() => {
+  //     getProductsInCart();
+  //   }, 1000);
+  // };
+
+  const handleSolveOrders = async (values) => {
+    const selected = productsInCart.filter((product) =>
+      selectedRowKeys.includes(product.cartItemId)
+    );
+
+    const orderItemRequests = selected.map(item => {
+      return {
+        productId: item.productId,
+        size: item.productSize,
+        quantity: item.productQuantity
+      }
+    });
+
+    const orderProducts = {
+      ...values,
+      orderItemRequests,
+      userId: id
+    }
+
+    const response = await fetch(`/order/user/insert`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(orderProducts)
+    })
+    const data = await response.json();
+    if (data.success) {
+      for (const item of selected) {
+        await deleteProductsInCart(item.cartItemId);
       }
     }
 
-    if (flag) {
-      openNotification(
-        "Thành công",
-        "Đã đặt hàng các sản phẩm đã chọn",
-        "success"
-      );
-    } else {
-      openNotification(
-        "Thất bại",
-        "Sản phẩm đã hết hoặc không đủ số lượng",
-        "error"
-      );
-    }
-
-    setIsModalOpen(false); // Đóng modal
-    setTimeout(() => {
-      getProductsInCart();
-    }, 1000);
-  };
+    return data;
+  }
 
   return (
     <>
@@ -438,7 +490,7 @@ const ProductTable = () => {
         <Table
           columns={columns}
           dataSource={productsInCart}
-          rowKey="id"
+          rowKey="cartItemId"
           className="custom-table"
           pagination={false}
         />
@@ -482,6 +534,7 @@ const ProductTable = () => {
         okButtonProps={{ form: "orderForm", htmlType: "submit" }} // Liên kết với form
         okText="Đặt hàng"
         cancelText="Hủy"
+        style={{ top: 10 }}
       >
         <Form
           id="orderForm"
@@ -496,60 +549,70 @@ const ProductTable = () => {
               okType: "primary",
               cancelText: "Hủy",
               onOk: async () => {
-                let flag = false;
+                // let flag = false;
 
-                for (const itemProductInCart of selectedProducts) {
-                  const product = products.find(
-                    (item) => item.id === itemProductInCart.productId
-                  );
+                // for (const itemProductInCart of selectedProducts) {
+                //   const product = products.find(
+                //     (item) => item.id === itemProductInCart.productId
+                //   );
 
-                  const quantity = product?.size.find(
-                    (item) => item.size === itemProductInCart.productSize
-                  );
+                //   const quantity = product?.size.find(
+                //     (item) => item.size === itemProductInCart.productSize
+                //   );
 
-                  if (quantity?.stock >= itemProductInCart.productQuantity) {
-                    try {
-                      // Xóa sản phẩm khỏi giỏ hàng
-                      const responseDeleteProductsInCart =
-                        await deleteProductsInCart(itemProductInCart.id);
-                      await postProductsOnHistory(responseDeleteProductsInCart, values);
+                //   if (quantity?.stock >= itemProductInCart.productQuantity) {
+                //     try {
+                //       // Xóa sản phẩm khỏi giỏ hàng
+                //       const responseDeleteProductsInCart =
+                //         await deleteProductsInCart(itemProductInCart.id);
+                //       await postProductsOnHistory(responseDeleteProductsInCart, values);
 
-                      // Sản phẩm đã mua -> Trừ số lượng ở trang Home
-                      const responseProductIsDeleted =
-                        await getProductIsDeleted(
-                          responseDeleteProductsInCart.productId
-                        );
-                      responseProductIsDeleted.size.forEach((item) => {
-                        if (
-                          item.size === responseDeleteProductsInCart.productSize
-                        ) {
-                          item.stock -=
-                            responseDeleteProductsInCart.productQuantity;
-                        }
-                      });
-                      await patchProductIsDeleted(responseProductIsDeleted);
-                      flag = true;
-                    } catch (error) {
-                      openNotification(
-                        "Thất bại",
-                        "Đặt hàng thất bại",
-                        "error"
-                      );
-                    }
-                  }
-                }
+                //       // Sản phẩm đã mua -> Trừ số lượng ở trang Home
+                //       const responseProductIsDeleted =
+                //         await getProductIsDeleted(
+                //           responseDeleteProductsInCart.productId
+                //         );
+                //       responseProductIsDeleted.size.forEach((item) => {
+                //         if (
+                //           item.size === responseDeleteProductsInCart.productSize
+                //         ) {
+                //           item.stock -=
+                //             responseDeleteProductsInCart.productQuantity;
+                //         }
+                //       });
+                //       await patchProductIsDeleted(responseProductIsDeleted);
+                //       flag = true;
+                //     } catch (error) {
+                //       openNotification(
+                //         "Thất bại",
+                //         "Đặt hàng thất bại",
+                //         "error"
+                //       );
+                //     }
+                //   }
+                // }
 
-                if (flag) {
+                // if (flag) {
+                //   openNotification(
+                //     "Thành công",
+                //     "Đã đặt hàng các sản phẩm đã chọn",
+                //     "success"
+                //   );
+                // } else {
+                //   openNotification(
+                //     "Thất bại",
+                //     "Sản phẩm đã hết hoặc không đủ số lượng",
+                //     "error"
+                //   );
+                // }
+
+                // Xử lý orders
+                const response = await handleSolveOrders(values);
+                if(response.success) {
                   openNotification(
                     "Thành công",
                     "Đã đặt hàng các sản phẩm đã chọn",
                     "success"
-                  );
-                } else {
-                  openNotification(
-                    "Thất bại",
-                    "Sản phẩm đã hết hoặc không đủ số lượng",
-                    "error"
                   );
                 }
 
@@ -564,10 +627,10 @@ const ProductTable = () => {
           }}
           initialValues={{
             shippingMethod: "Giao tận nơi",
-            pickupTime: "08:00 - 09:00",
-            notes: "",
+            deliveryTime: "08:00 - 09:00",
+            note: "",
             fullName: user.fullName,
-            phone: user.phone,
+            phoneNumber: user.phone,
             email: user.email,
             address: user.address,
           }}
@@ -620,13 +683,13 @@ const ProductTable = () => {
                     },
                   ]}
                 >
-                  <Select>
+                  <Select onChange={handleShippingChange}>
                     <Option value="Giao tận nơi">Giao tận nơi</Option>
                     <Option value="Tự đến lấy">Tự đến lấy</Option>
                   </Select>
                 </Form.Item>
                 <Form.Item
-                  name="pickupTime"
+                  name="deliveryTime"
                   label="Thời gian lấy hàng"
                   rules={[
                     {
@@ -641,7 +704,7 @@ const ProductTable = () => {
                     <Option value="10:00 - 11:00">10:00 - 11:00</Option>
                   </Select>
                 </Form.Item>
-                <Form.Item name="notes" label="Ghi chú đơn hàng">
+                <Form.Item name="note" label="Ghi chú đơn hàng">
                   <TextArea
                     placeholder="Nhập ghi chú"
                     style={{ width: "100%", height: 50 }}
@@ -734,7 +797,7 @@ const ProductTable = () => {
                   <Input placeholder="Nhập họ và tên" />
                 </Form.Item>
                 <Form.Item
-                  name="phone"
+                  name="phoneNumber"
                   label="Số điện thoại"
                   rules={[
                     { required: true, message: "Vui lòng nhập số điện thoại!" },
